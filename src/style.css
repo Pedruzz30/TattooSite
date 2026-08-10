@@ -1320,51 +1320,107 @@ button {
 
 .site-footer {
   --rule: rgba(255, 255, 255, 0.12);
-  padding: 0 5vw 56px;
+  overflow: hidden;
   background: #090909;
 }
 
-.footer-top {
-  display: flex;
+.footer-inner {
+  padding: 0 5vw;
+}
+
+.footer-back {
+  display: inline-flex;
   align-items: center;
-  gap: 40px;
-  padding: 48px 0 36px;
-  border-top: 1px solid var(--rule);
+  gap: 10px;
+  opacity: 0.45;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: opacity 0.25s ease;
 }
 
-.footer-top .logo {
-  width: auto;
+.footer-back:hover {
+  opacity: 1;
 }
 
-.footer-nav,
-.footer-social {
-  display: flex;
-  gap: 32px;
+.footer-back-arrow {
   font-size: 13px;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.footer-nav {
-  margin-left: auto;
+.footer-back:hover .footer-back-arrow {
+  transform: translateY(-5px);
 }
 
-.footer-nav a,
-.footer-social a {
+.footer-columns {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 48px 2.2vw;
+  padding: 72px 0 88px;
+}
+
+.footer-column-title {
+  opacity: 0.35;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.footer-column ul {
+  display: grid;
+  gap: 14px;
+  margin-top: 28px;
   color: rgba(255, 255, 255, 0.55);
+  font-size: 14px;
+  list-style: none;
+}
+
+.footer-column a {
   transition: color 0.25s ease;
 }
 
-.footer-nav a:hover,
-.footer-social a:hover {
+.footer-column a:hover {
   color: #fff;
+}
+
+.footer-column--cta p {
+  margin-top: 28px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.footer-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 26px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--rule);
+  font-size: 15px;
+  transition: border-color 0.3s ease;
+}
+
+.footer-cta:hover {
+  border-bottom-color: rgba(255, 255, 255, 0.7);
+}
+
+.footer-cta span {
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.footer-cta:hover span {
+  transform: translate3d(4px, -4px, 0);
 }
 
 .footer-legal {
   display: flex;
   flex-wrap: wrap;
   gap: 12px 40px;
-  padding-top: 28px;
+  padding-top: 26px;
   border-top: 1px solid var(--rule);
-  color: rgba(255, 255, 255, 0.35);
+  color: rgba(255, 255, 255, 0.32);
   font-size: 12px;
   line-height: 1.5;
 }
@@ -1374,6 +1430,24 @@ button {
   color: rgba(255, 255, 255, 0.75);
   font-weight: 600;
   letter-spacing: 0.06em;
+}
+
+/*
+ * Assinatura: ecoa a palavra gigante do hero e sangra
+ * pela base — o overflow da footer corta a barriga da letra.
+ */
+.footer-wordmark {
+  margin-top: 40px;
+  margin-bottom: -0.19em;
+  color: rgba(255, 255, 255, 0.055);
+  font-size: clamp(120px, 27vw, 480px);
+  font-weight: 300;
+  letter-spacing: -0.06em;
+  line-height: 0.78;
+  pointer-events: none;
+  text-align: center;
+  user-select: none;
+  white-space: nowrap;
 }
 
 .mobile-menu {
@@ -1685,13 +1759,10 @@ button {
     margin-top: 72px;
   }
 
-  .footer-top {
-    flex-wrap: wrap;
-    gap: 24px 32px;
-  }
-
-  .footer-nav {
-    margin-left: 0;
+  .footer-columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 52px 3vw;
+    padding: 56px 0 72px;
   }
 }
 
@@ -1959,24 +2030,26 @@ button {
     gap: 26px;
   }
 
-  .site-footer {
-    padding: 0 20px 40px;
+  .footer-inner {
+    padding: 0 20px;
   }
 
-  .footer-top {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 28px;
-    padding: 40px 0 32px;
+  .footer-columns {
+    grid-template-columns: 1fr;
+    gap: 44px;
+    padding: 48px 0 56px;
   }
 
-  .footer-nav,
-  .footer-social {
-    gap: 24px;
+  .footer-column ul {
+    margin-top: 20px;
   }
 
   .footer-legal {
     gap: 10px;
+  }
+
+  .footer-wordmark {
+    margin-top: 28px;
   }
 
   .mobile-menu nav a {

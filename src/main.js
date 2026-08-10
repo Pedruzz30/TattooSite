@@ -184,6 +184,20 @@ if (!prefersReducedMotion) {
   revealFrom(".contact-form > *", ".contact-form", { y: 30, stagger: 0.07 });
   revealFrom(".contact-note", ".contact-aside", { stagger: 0.14 });
 
+  revealFrom(".footer-column", ".footer-columns", { y: 32, stagger: 0.1 });
+
+  gsap.from(".footer-wordmark", {
+    yPercent: 40,
+    opacity: 0,
+    duration: 1.2,
+    ease: "power3.out",
+    scrollTrigger: {
+      trigger: ".footer-wordmark",
+      start: "top 95%",
+      toggleActions: "play none none reverse"
+    }
+  });
+
   gsap.to(".hero-title", {
     yPercent: -30,
     opacity: 0,
