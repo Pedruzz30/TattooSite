@@ -3,8 +3,6 @@ import "./style.css";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import { initInkEffect } from "./ink";
-
 gsap.registerPlugin(ScrollTrigger);
 
 const prefersReducedMotion =
@@ -12,8 +10,6 @@ const prefersReducedMotion =
   new URLSearchParams(window.location.search).has("reduced-motion");
 
 if (!prefersReducedMotion) {
-  initInkEffect();
-
   const intro = gsap.timeline({
     defaults: {
       ease: "power3.out"
@@ -45,16 +41,6 @@ if (!prefersReducedMotion) {
       "-=0.8"
     )
     .from(
-      ".machine-stage",
-      {
-        y: 100,
-        opacity: 0,
-        scale: 0.9,
-        duration: 1.3
-      },
-      "-=0.8"
-    )
-    .from(
       ".work-card",
       {
         y: 60,
@@ -65,15 +51,138 @@ if (!prefersReducedMotion) {
       "-=0.7"
     );
 
-  gsap.to(".machine-stage", {
-    yPercent: 12,
+  gsap.from(".machine-stage--work", {
+    y: 120,
+    opacity: 0,
+    scale: 0.92,
+    duration: 1.3,
+    ease: "power3.out",
     scrollTrigger: {
-      trigger: ".hero",
-      start: "top top",
-      end: "bottom top",
-      scrub: true
+      trigger: ".work-section",
+      start: "top 72%",
+      toggleActions: "play none none reverse"
     }
   });
+
+  gsap.from(".work-head > *", {
+    y: 44,
+    opacity: 0,
+    stagger: 0.12,
+    duration: 1,
+    ease: "power3.out",
+    scrollTrigger: {
+      trigger: ".work-head",
+      start: "top 78%",
+      toggleActions: "play none none reverse"
+    }
+  });
+
+  /*
+   * Cada peça revela sozinha: a máscara abre de baixo
+   * para cima enquanto o card sobe.
+   */
+  gsap.utils.toArray(".work-tile").forEach((tile) => {
+    gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: tile,
+          start: "top 86%",
+          toggleActions: "play none none reverse"
+        }
+      })
+      .from(tile.querySelector(".work-tile-media"), {
+        clipPath: "inset(100% 0% 0% 0%)",
+        duration: 1.15,
+        ease: "power3.out"
+      })
+      .from(
+        tile.querySelector(".work-tile-caption"),
+        {
+          y: 24,
+          opacity: 0,
+          duration: 0.7,
+          ease: "power3.out"
+        },
+        0.35
+      );
+  });
+
+  const revealFrom = (target, trigger, vars = {}) =>
+    gsap.from(target, {
+      y: 40,
+      opacity: 0,
+      duration: 0.9,
+      ease: "power3.out",
+      ...vars,
+      scrollTrigger: {
+        trigger,
+        start: "top 82%",
+        toggleActions: "play none none reverse"
+      }
+    });
+
+  revealFrom(".artist-head > *", ".artist-head", { stagger: 0.12 });
+
+  gsap
+    .timeline({
+      scrollTrigger: {
+        trigger: ".artist-intro",
+        start: "top 78%",
+        toggleActions: "play none none reverse"
+      }
+    })
+    .from(".artist-portrait-media", {
+      clipPath: "inset(100% 0% 0% 0%)",
+      duration: 1.15,
+      ease: "power3.out"
+    })
+    .from(
+      ".artist-portrait figcaption, .artist-bio > *",
+      {
+        y: 32,
+        opacity: 0,
+        stagger: 0.1,
+        duration: 0.8,
+        ease: "power3.out"
+      },
+      0.3
+    );
+
+  revealFrom(".process-step", ".process-list", { stagger: 0.12 });
+
+  gsap
+    .timeline({
+      scrollTrigger: {
+        trigger: ".artist-studio",
+        start: "top 78%",
+        toggleActions: "play none none reverse"
+      }
+    })
+    .from(".studio-media", {
+      clipPath: "inset(0% 0% 0% 100%)",
+      duration: 1.15,
+      ease: "power3.out"
+    })
+    .from(
+      ".studio-info > *",
+      {
+        y: 32,
+        opacity: 0,
+        stagger: 0.09,
+        duration: 0.8,
+        ease: "power3.out"
+      },
+      0.25
+    );
+
+  revealFrom(".artist-social li", ".artist-social ul", {
+    y: 28,
+    stagger: 0.08
+  });
+
+  revealFrom(".contact-head > *", ".contact-head", { stagger: 0.12 });
+  revealFrom(".contact-form > *", ".contact-form", { y: 30, stagger: 0.07 });
+  revealFrom(".contact-note", ".contact-aside", { stagger: 0.14 });
 
   gsap.to(".hero-title", {
     yPercent: -30,
@@ -84,5 +193,135 @@ if (!prefersReducedMotion) {
       end: "bottom top",
       scrub: true
     }
+  });
+
+  const machineSection = document.querySelector(".work-section");
+  const machineVisual = document.querySelector(".machine-visual");
+
+  if (machineSection && machineVisual) {
+    const compactViewport = window.matchMedia("(max-width: 620px)");
+    const current = { x: 0, y: 0, rotation: 0 };
+    const target = { x: 0, y: 0, rotation: 0 };
+    let animationFrame = null;
+
+    const renderMachineParallax = () => {
+      current.x += (target.x - current.x) * 0.08;
+      current.y += (target.y - current.y) * 0.08;
+      current.rotation += (target.rotation - current.rotation) * 0.08;
+
+      machineVisual.style.setProperty("--machine-x", `${current.x.toFixed(2)}px`);
+      machineVisual.style.setProperty("--machine-y", `${current.y.toFixed(2)}px`);
+      machineVisual.style.setProperty(
+        "--machine-rotation",
+        `${current.rotation.toFixed(2)}deg`
+      );
+
+      const isMoving =
+        Math.abs(target.x - current.x) > 0.02 ||
+        Math.abs(target.y - current.y) > 0.02 ||
+        Math.abs(target.rotation - current.rotation) > 0.01;
+
+      animationFrame = isMoving
+        ? requestAnimationFrame(renderMachineParallax)
+        : null;
+    };
+
+    const requestParallaxFrame = () => {
+      if (animationFrame === null) {
+        animationFrame = requestAnimationFrame(renderMachineParallax);
+      }
+    };
+
+    machineSection.addEventListener(
+      "pointermove",
+      (event) => {
+        const bounds = machineSection.getBoundingClientRect();
+        const horizontal = ((event.clientX - bounds.left) / bounds.width) * 2 - 1;
+        const vertical = ((event.clientY - bounds.top) / bounds.height) * 2 - 1;
+        const movement = compactViewport.matches
+          ? { x: 4, y: 3, rotation: 0.5 }
+          : { x: 10, y: 7, rotation: 1.5 };
+
+        target.x = horizontal * movement.x;
+        target.y = vertical * movement.y;
+        target.rotation =
+          horizontal * movement.rotation * 0.8 +
+          vertical * movement.rotation * 0.2;
+        requestParallaxFrame();
+      },
+      { passive: true }
+    );
+
+    machineSection.addEventListener("pointerleave", () => {
+      target.x = 0;
+      target.y = 0;
+      target.rotation = 0;
+      requestParallaxFrame();
+    });
+  }
+}
+
+/*
+ * Menu e formulário ficam fora do bloco acima:
+ * são funcionalidade, precisam rodar mesmo com movimento reduzido.
+ */
+const menuButton = document.querySelector(".menu-button");
+const mobileMenu = document.querySelector("#mobile-menu");
+
+if (menuButton && mobileMenu) {
+  const setMenu = (open) => {
+    menuButton.setAttribute("aria-expanded", String(open));
+    menuButton.setAttribute("aria-label", open ? "Fechar menu" : "Abrir menu");
+    mobileMenu.hidden = !open;
+    document.body.style.overflow = open ? "hidden" : "";
+
+    if (open) {
+      mobileMenu.querySelector("a")?.focus();
+    } else {
+      menuButton.focus();
+    }
+  };
+
+  menuButton.addEventListener("click", () => {
+    setMenu(menuButton.getAttribute("aria-expanded") !== "true");
+  });
+
+  /* Link ou botão de fechar: os dois derrubam o overlay. */
+  mobileMenu.addEventListener("click", (event) => {
+    if (event.target.closest("a, .mobile-menu-close")) {
+      setMenu(false);
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !mobileMenu.hidden) {
+      setMenu(false);
+    }
+  });
+}
+
+const contactForm = document.querySelector(".contact-form");
+
+if (contactForm) {
+  const status = contactForm.querySelector(".form-status");
+
+  contactForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    if (!contactForm.checkValidity()) {
+      status.dataset.state = "error";
+      status.textContent = "Preencha os campos obrigatórios antes de enviar.";
+      contactForm.reportValidity();
+      return;
+    }
+
+    /*
+     * RASCUNHO: não existe endpoint ainda.
+     * Trocar por fetch(action, { method: "POST", body: new FormData(contactForm) })
+     * quando o Formspree/backend estiver de pé.
+     */
+    delete status.dataset.state;
+    status.textContent =
+      "Formulário validado — mas ainda não existe endpoint, então nada foi enviado.";
   });
 }

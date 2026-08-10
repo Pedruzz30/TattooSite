@@ -6,10 +6,28 @@
 
   <meta
     name="description"
-    content="Portfólio de tatuagem autoral, blackwork e blackout."
+    content="Estúdio de tatuagem autoral no Rio de Janeiro: blackwork, fine line e realismo. Projetos desenhados do zero, uma sessão por vez."
   />
 
   <title>INK — Tattoo Artist</title>
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <meta name="theme-color" content="#090909" />
+
+  <!--
+    RASCUNHO: og:url e og:image precisam de URL absoluta para o preview
+    funcionar no Instagram e no WhatsApp. Trocar pelo domínio real.
+  -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:site_name" content="INK Estúdio" />
+  <meta property="og:title" content="INK — Tattoo Artist" />
+  <meta
+    property="og:description"
+    content="Blackwork, fine line e realismo no Rio de Janeiro. Projetos autorais desenhados do zero."
+  />
+  <meta property="og:image" content="/src/assets/TintaTattooHero.img1.png" />
+  <meta name="twitter:card" content="summary_large_image" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,9 +46,6 @@
 
     <section class="hero" id="home">
 
-      <!-- Efeito de tinta -->
-      <canvas id="ink-canvas"></canvas>
-
       <!-- Grid estrutural da referência -->
       <div class="hero-grid" aria-hidden="true">
         <span></span>
@@ -38,7 +53,16 @@
         <span></span>
       </div>
 
-      <div class="hero-word" aria-hidden="true">INK</div>
+      <div class="hero-ink" aria-hidden="true">
+        <img
+          class="hero-ink-image"
+          src="/src/assets/TintaTattooHero.img1.png"
+          alt=""
+          draggable="false"
+        />
+      </div>
+
+      <div class="hero-word" aria-hidden="true">Realismo</div>
 
       <header class="navbar">
         <a href="#home" class="logo">
@@ -53,7 +77,13 @@
 
         <div class="nav-actions">
           <a href="#contact" class="nav-contact">Agenda</a>
-          <button class="menu-button" type="button" aria-label="Abrir menu">
+          <button
+            class="menu-button"
+            type="button"
+            aria-label="Abrir menu"
+            aria-controls="mobile-menu"
+            aria-expanded="false"
+          >
             <span></span>
             <span></span>
           </button>
@@ -76,7 +106,7 @@
 
         <div class="hero-description">
           <p>
-            Blackwork, blackout e projetos autorais
+            Blackwork, fine line e realismo
             criados para acompanhar o corpo e
             atravessar o tempo.
           </p>
@@ -89,22 +119,12 @@
           </a>
         </div>
 
-
-        <!-- Futuramente Three.js entra aqui -->
-        <div class="machine-stage">
-          <div class="machine-placeholder">
-            <span>3D</span>
-            <strong>TATTOO MACHINE</strong>
-          </div>
-        </div>
-
-
         <article class="work-card work-card--one">
           <div class="work-image work-image--one"></div>
 
           <div class="work-card-info">
             <span>Projeto autoral</span>
-            <strong>Blackwork<br />sem limites.</strong>
+            <strong>Realismo<br />sem limites.</strong>
           </div>
 
           <a href="#work" class="card-action card-action--light" aria-label="Ver projeto Blackwork">
@@ -156,19 +176,542 @@
     </section>
 
 
-    <section class="work-section" id="work">
-      <span>01 / Trabalhos selecionados</span>
+    <section class="work-section" id="work" aria-labelledby="work-title">
 
-      <h2>
-        ALGUMAS MARCAS
-        <br />
-        FORAM FEITAS
-        <br />
-        PARA FICAR.
-      </h2>
+      <div class="machine-stage machine-stage--work" aria-hidden="true">
+        <div class="machine-visual">
+          <div class="machine-float">
+            <img
+              class="tattoo-machine"
+              src="/src/assets/TattooMachine.img.png"
+              alt=""
+              draggable="false"
+              loading="lazy"
+              decoding="async"
+            />
+            <span class="machine-light" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="work-head">
+        <div class="section-head-top">
+          <span class="section-label">01 / Trabalhos selecionados</span>
+          <span class="section-label section-label--muted">06 peças / 2024 — 2025</span>
+        </div>
+
+        <h2 id="work-title">
+          ALGUMAS MARCAS
+          <br />
+          FORAM FEITAS
+          <br />
+          PARA FICAR.
+        </h2>
+
+        <p class="work-intro">
+          Projetos fechados na agulha, desenhados do zero
+          para o corpo de cada pessoa.
+          <strong>Blackwork · Fine line · Realismo</strong>
+        </p>
+      </div>
+
+      <!--
+        Placeholder: troque cada <span class="work-tile-image ..."></span>
+        por <img class="work-tile-image" src="/src/assets/…" alt="…" loading="lazy" decoding="async" />
+        e remova o modificador --0N do CSS quando a foto real entrar.
+      -->
+      <div class="work-gallery">
+
+        <article class="work-tile work-tile--01">
+          <a href="#work" class="work-tile-link" aria-labelledby="tile-01">
+            <span class="work-tile-media">
+              <span
+                class="work-tile-image work-tile-image--01"
+                role="img"
+                aria-label="Serpente ornamental em blackwork no antebraço"
+              ></span>
+            </span>
+            <span class="work-tile-index" aria-hidden="true">01</span>
+            <span class="card-action card-action--light work-tile-view" aria-hidden="true">
+              <span class="dot-grid"></span>
+            </span>
+          </a>
+
+          <div class="work-tile-caption">
+            <h3 id="tile-01">Serpente ornamental</h3>
+            <span>Blackwork · 2025</span>
+          </div>
+        </article>
+
+        <article class="work-tile work-tile--02">
+          <a href="#work" class="work-tile-link" aria-labelledby="tile-02">
+            <span class="work-tile-media">
+              <span
+                class="work-tile-image work-tile-image--02"
+                role="img"
+                aria-label="Fechamento de peito em blackwork"
+              ></span>
+            </span>
+            <span class="work-tile-index" aria-hidden="true">02</span>
+            <span class="card-action card-action--light work-tile-view" aria-hidden="true">
+              <span class="dot-grid"></span>
+            </span>
+          </a>
+
+          <div class="work-tile-caption">
+            <h3 id="tile-02">Mapa do peito</h3>
+            <span>Blackwork · 2025</span>
+          </div>
+        </article>
+
+        <article class="work-tile work-tile--03">
+          <a href="#work" class="work-tile-link" aria-labelledby="tile-03">
+            <span class="work-tile-media">
+              <span
+                class="work-tile-image work-tile-image--03"
+                role="img"
+                aria-label="Retrato realista em tons de cinza"
+              ></span>
+            </span>
+            <span class="work-tile-index" aria-hidden="true">03</span>
+            <span class="card-action card-action--light work-tile-view" aria-hidden="true">
+              <span class="dot-grid"></span>
+            </span>
+          </a>
+
+          <div class="work-tile-caption">
+            <h3 id="tile-03">Retrato em cinza</h3>
+            <span>Realismo · 2024</span>
+          </div>
+        </article>
+
+        <article class="work-tile work-tile--04">
+          <a href="#work" class="work-tile-link" aria-labelledby="tile-04">
+            <span class="work-tile-media">
+              <span
+                class="work-tile-image work-tile-image--04"
+                role="img"
+                aria-label="Traços finos na lateral da mão"
+              ></span>
+            </span>
+            <span class="work-tile-index" aria-hidden="true">04</span>
+            <span class="card-action card-action--light work-tile-view" aria-hidden="true">
+              <span class="dot-grid"></span>
+            </span>
+          </a>
+
+          <div class="work-tile-caption">
+            <h3 id="tile-04">Linhas de mão</h3>
+            <span>Fine line · 2025</span>
+          </div>
+        </article>
+
+        <article class="work-tile work-tile--05">
+          <a href="#work" class="work-tile-link" aria-labelledby="tile-05">
+            <span class="work-tile-media">
+              <span
+                class="work-tile-image work-tile-image--05"
+                role="img"
+                aria-label="Asa fechada em preto sólido no ombro"
+              ></span>
+            </span>
+            <span class="work-tile-index" aria-hidden="true">05</span>
+            <span class="card-action card-action--light work-tile-view" aria-hidden="true">
+              <span class="dot-grid"></span>
+            </span>
+          </a>
+
+          <div class="work-tile-caption">
+            <h3 id="tile-05">Asa fechada</h3>
+            <span>Blackwork · 2024</span>
+          </div>
+        </article>
+
+        <article class="work-tile work-tile--06">
+          <a href="#work" class="work-tile-link" aria-labelledby="tile-06">
+            <span class="work-tile-media">
+              <span
+                class="work-tile-image work-tile-image--06"
+                role="img"
+                aria-label="Braço fechado com projeto autoral"
+              ></span>
+            </span>
+            <span class="work-tile-index" aria-hidden="true">06</span>
+            <span class="card-action card-action--light work-tile-view" aria-hidden="true">
+              <span class="dot-grid"></span>
+            </span>
+          </a>
+
+          <div class="work-tile-caption">
+            <h3 id="tile-06">Braço completo</h3>
+            <span>Projeto autoral · 2025</span>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="work-footer">
+        <a href="#contact" class="button">
+          <span class="button-icon" aria-hidden="true">
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          </span>
+          <span>Agendar um projeto</span>
+        </a>
+      </div>
+
+    </section>
+
+
+    <!--
+      RASCUNHO: artista, endereço, números e @ são fictícios.
+      Trocar antes de qualquer publicação — inclusive os href="#" das redes.
+    -->
+    <section class="artist-section" id="artist" aria-labelledby="artist-title">
+
+      <div class="artist-head">
+        <div class="section-head-top">
+          <span class="section-label">02 / O artista</span>
+          <span class="section-label section-label--muted">Estúdio INK / Rio de Janeiro</span>
+        </div>
+
+        <h2 id="artist-title">
+          NOME
+          <br />
+          SOBRENOME.
+        </h2>
+      </div>
+
+      <div class="artist-intro">
+        <figure class="artist-portrait">
+          <span class="artist-portrait-media">
+            <span
+              class="artist-portrait-image"
+              role="img"
+              aria-label="Retrato do tatuador segurando a máquina"
+            ></span>
+          </span>
+          <figcaption>Rio de Janeiro · desde 2015</figcaption>
+        </figure>
+
+        <div class="artist-bio">
+          <p class="artist-lead">
+            Comecei desenhando no papel de embrulho da padaria do meu pai.
+            Hoje desenho na pele — e continua sendo a mesma coisa:
+            achar a linha certa antes de puxar.
+          </p>
+
+          <p>
+            Trabalho autoral. Não copio tatuagem de ninguém e não pego projeto
+            que eu não assinaria embaixo. Cada peça nasce de uma conversa,
+            vira desenho, e só depois vira agulha.
+          </p>
+
+          <p>
+            Blackwork denso, realismo em cinza e traço fino. Três caminhos
+            para a mesma ideia: uma marca que envelhece bem.
+          </p>
+
+          <ul class="artist-stats">
+            <li>
+              <strong>10</strong>
+              <span>anos de agulha</span>
+            </li>
+            <li>
+              <strong>+900</strong>
+              <span>projetos fechados</span>
+            </li>
+            <li>
+              <strong>90</strong>
+              <span>dias de retoque</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="artist-process">
+        <div class="section-head-top">
+          <span class="section-label">Como eu trabalho</span>
+          <span class="section-label section-label--muted">04 etapas</span>
+        </div>
+
+        <ol class="process-list">
+          <li class="process-step">
+            <span class="process-number" aria-hidden="true">01</span>
+            <h3>Conversa</h3>
+            <p>
+              Você manda referência, região do corpo e o que a peça significa.
+              Respondo em até 48h com caminho, tamanho e orçamento.
+            </p>
+          </li>
+
+          <li class="process-step">
+            <span class="process-number" aria-hidden="true">02</span>
+            <h3>Desenho</h3>
+            <p>
+              Desenho do zero, só seu. Você vê o traço antes da sessão e a gente
+              ajusta o que precisar, quantas vezes for preciso.
+            </p>
+          </li>
+
+          <li class="process-step">
+            <span class="process-number" aria-hidden="true">03</span>
+            <h3>Sessão</h3>
+            <p>
+              Material descartável aberto na sua frente. De 3 a 6 horas com pausa,
+              e peças grandes divididas para a pele descansar.
+            </p>
+          </li>
+
+          <li class="process-step">
+            <span class="process-number" aria-hidden="true">04</span>
+            <h3>Cicatrização</h3>
+            <p>
+              Você sai com o curativo e o cuidado por escrito. Retoque dentro
+              de 90 dias por conta do estúdio.
+            </p>
+          </li>
+        </ol>
+      </div>
+
+      <div class="artist-studio">
+        <div class="studio-media">
+          <span
+            class="studio-image"
+            role="img"
+            aria-label="Sala do estúdio com uma única cadeira de tatuagem"
+          ></span>
+        </div>
+
+        <div class="studio-info">
+          <span class="section-label">O estúdio</span>
+
+          <h3>Uma cadeira só.</h3>
+
+          <p>
+            O INK ocupa uma sala no segundo andar, com uma cadeira apenas.
+            Sem fila, sem música alta, sem gente passando atrás de você:
+            um atendimento por vez, da abertura ao fechamento.
+          </p>
+
+          <dl class="studio-details">
+            <div>
+              <dt>Endereço</dt>
+              <dd>Rua do Lavradio, 000<br />Lapa — Rio de Janeiro</dd>
+            </div>
+            <div>
+              <dt>Atendimento</dt>
+              <dd>Terça a sábado, 11h — 20h<br />Somente com hora marcada</dd>
+            </div>
+            <div>
+              <dt>Agendamento</dt>
+              <dd>Sinal de 30% reserva a data<br />Abatido no valor final</dd>
+            </div>
+            <div>
+              <dt>Higiene</dt>
+              <dd>Material descartável e autoclave<br />Alvará sanitário na parede</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+
+      <nav class="artist-social" aria-label="Redes sociais e contato">
+        <div class="section-head-top">
+          <span class="section-label">Onde me achar</span>
+          <span class="section-label section-label--muted">Resposta em até 48h</span>
+        </div>
+
+        <ul>
+          <li>
+            <a href="#" class="social-link">
+              <span class="social-index" aria-hidden="true">01</span>
+              <span class="social-name">Instagram</span>
+              <span class="social-handle">@ink.rascunho</span>
+              <span class="social-arrow" aria-hidden="true">↗</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="social-link">
+              <span class="social-index" aria-hidden="true">02</span>
+              <span class="social-name">TikTok</span>
+              <span class="social-handle">@ink.rascunho</span>
+              <span class="social-arrow" aria-hidden="true">↗</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="social-link">
+              <span class="social-index" aria-hidden="true">03</span>
+              <span class="social-name">WhatsApp</span>
+              <span class="social-handle">Agendamento direto</span>
+              <span class="social-arrow" aria-hidden="true">↗</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="social-link">
+              <span class="social-index" aria-hidden="true">04</span>
+              <span class="social-name">E-mail</span>
+              <span class="social-handle">contato@ink.tattoo</span>
+              <span class="social-arrow" aria-hidden="true">↗</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+    </section>
+
+
+    <section class="contact-section" id="contact" aria-labelledby="contact-title">
+
+      <div class="contact-head">
+        <div class="section-head-top">
+          <span class="section-label">03 / Agenda</span>
+          <span class="section-label section-label--muted">Agenda aberta</span>
+        </div>
+
+        <h2 id="contact-title">
+          VAMOS FECHAR
+          <br />
+          SEU PROJETO.
+        </h2>
+      </div>
+
+      <div class="contact-body">
+
+        <!--
+          RASCUNHO: o formulário ainda não envia para lugar nenhum.
+          Antes de publicar, aponte o action para um endpoint real
+          (Formspree, Basin, backend próprio) e troque o handler em main.js.
+        -->
+        <form class="contact-form" action="#" method="post" novalidate>
+
+          <div class="field">
+            <label for="field-name">Nome</label>
+            <input id="field-name" name="nome" type="text" autocomplete="name" required />
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="field-contact">WhatsApp ou e-mail</label>
+              <input id="field-contact" name="contato" type="text" autocomplete="email" required />
+            </div>
+
+            <div class="field">
+              <label for="field-style">Estilo</label>
+              <select id="field-style" name="estilo" required>
+                <option value="">Selecione</option>
+                <option>Blackwork</option>
+                <option>Fine line</option>
+                <option>Realismo</option>
+                <option>Ainda não sei</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="field-place">Região do corpo</label>
+              <input id="field-place" name="regiao" type="text" placeholder="Antebraço, costas…" />
+            </div>
+
+            <div class="field">
+              <label for="field-size">Tamanho aproximado</label>
+              <input id="field-size" name="tamanho" type="text" placeholder="15 cm, fechamento…" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="field-idea">A ideia</label>
+            <textarea
+              id="field-idea"
+              name="ideia"
+              rows="5"
+              placeholder="O que a peça significa, referências que você curte, prazo que tem em mente."
+              required
+            ></textarea>
+          </div>
+
+          <label class="field-check" for="field-age">
+            <input id="field-age" name="maioridade" type="checkbox" required />
+            <span>Tenho 18 anos ou mais e vou levar documento com foto na sessão.</span>
+          </label>
+
+          <button class="button button--solid" type="submit">
+            <span class="button-icon" aria-hidden="true">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            </span>
+            <span>Enviar pedido</span>
+          </button>
+
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+
+        <aside class="contact-aside">
+          <div class="contact-note">
+            <span class="section-label">Antes de enviar</span>
+            <ul>
+              <li>Quanto mais referência você mandar, mais rápido o orçamento sai.</li>
+              <li>Não faço cobertura de cicatriz recente nem tatuagem em pele lesionada.</li>
+              <li>Menor de 18 não tatua, mesmo com autorização dos pais.</li>
+              <li>Respondo de terça a sábado, em até 48h. Fora disso, só na semana seguinte.</li>
+            </ul>
+          </div>
+
+          <div class="contact-note">
+            <span class="section-label">Sinal e remarcação</span>
+            <ul>
+              <li>Sinal de 30% reserva a data e é abatido no valor final.</li>
+              <li>Remarcação sem custo até 72h antes da sessão.</li>
+              <li>Falta sem aviso: o sinal não volta.</li>
+            </ul>
+          </div>
+        </aside>
+
+      </div>
+
     </section>
 
   </main>
+
+
+  <footer class="site-footer">
+    <div class="footer-top">
+      <a href="#home" class="logo">INK<span>.</span></a>
+
+      <nav class="footer-nav" aria-label="Rodapé">
+        <a href="#work">Trabalhos</a>
+        <a href="#artist">Artista</a>
+        <a href="#contact">Agenda</a>
+      </nav>
+
+      <div class="footer-social">
+        <a href="#">Instagram</a>
+        <a href="#">TikTok</a>
+        <a href="#">WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="footer-legal">
+      <p><strong>+18</strong> Documento com foto obrigatório na sessão.</p>
+      <p>Rua do Lavradio, 000 — Lapa, Rio de Janeiro · Alvará sanitário na parede.</p>
+      <p>© 2026 INK Estúdio. Rascunho de portfólio.</p>
+    </div>
+  </footer>
+
+
+  <div class="mobile-menu" id="mobile-menu" hidden>
+    <button class="mobile-menu-close" type="button" aria-label="Fechar menu">×</button>
+
+    <nav aria-label="Menu">
+      <a href="#home">Início</a>
+      <a href="#work">Trabalhos</a>
+      <a href="#artist">Artista</a>
+      <a href="#contact">Agenda</a>
+    </nav>
+
+    <div class="mobile-menu-foot">
+      <a href="#">Instagram</a>
+      <a href="#">WhatsApp</a>
+    </div>
+  </div>
 
   <script type="module" src="/src/main.js"></script>
 
