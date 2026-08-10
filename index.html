@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta
+    name="description"
+    content="Portfólio de tatuagem autoral, blackwork e blackout."
+  />
+
+  <title>INK — Tattoo Artist</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+
+<body>
+
+  <main>
+
+    <section class="hero" id="home">
+
+      <!-- Efeito de tinta -->
+      <canvas id="ink-canvas"></canvas>
+
+      <!-- Grid estrutural da referência -->
+      <div class="hero-grid" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <div class="hero-word" aria-hidden="true">INK</div>
+
+      <header class="navbar">
+        <a href="#home" class="logo">
+          INK<span>.</span>
+        </a>
+
+        <nav class="nav-links">
+          <a href="#home" class="active">Início</a>
+          <a href="#work">Trabalhos</a>
+          <a href="#artist">Artista</a>
+        </nav>
+
+        <div class="nav-actions">
+          <a href="#contact" class="nav-contact">Agenda</a>
+          <button class="menu-button" type="button" aria-label="Abrir menu">
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </header>
+
+
+      <div class="hero-content">
+
+        <div class="hero-title">
+          <p class="eyebrow">Tattoo Artist / RJ</p>
+
+          <h1>
+            ARTE SOB
+            <br />
+            A PELE.
+          </h1>
+        </div>
+
+
+        <div class="hero-description">
+          <p>
+            Blackwork, blackout e projetos autorais
+            criados para acompanhar o corpo e
+            atravessar o tempo.
+          </p>
+
+          <a href="#work" class="button">
+            <span class="button-icon" aria-hidden="true">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            </span>
+            <span>Ver trabalhos</span>
+          </a>
+        </div>
+
+
+        <!-- Futuramente Three.js entra aqui -->
+        <div class="machine-stage">
+          <div class="machine-placeholder">
+            <span>3D</span>
+            <strong>TATTOO MACHINE</strong>
+          </div>
+        </div>
+
+
+        <article class="work-card work-card--one">
+          <div class="work-image work-image--one"></div>
+
+          <div class="work-card-info">
+            <span>Projeto autoral</span>
+            <strong>Blackwork<br />sem limites.</strong>
+          </div>
+
+          <a href="#work" class="card-action card-action--light" aria-label="Ver projeto Blackwork">
+            <span class="dot-grid" aria-hidden="true"></span>
+          </a>
+        </article>
+
+
+        <article class="work-card work-card--two">
+          <span>Projeto 02</span>
+
+          <h2>
+            Feita
+            <br />
+            para ficar.
+          </h2>
+
+          <div class="work-image work-image--two" aria-hidden="true"></div>
+
+          <a href="#work" class="card-action card-action--dark" aria-label="Ver projeto ornamental">
+            <span class="dot-grid" aria-hidden="true"></span>
+          </a>
+        </article>
+
+        <aside class="hero-facts" aria-label="Especialidades do estúdio">
+          <div class="fact">
+            <span class="fact-mark fact-mark--rings" aria-hidden="true"></span>
+            <p>Blackwork<strong>Projetos autorais</strong></p>
+          </div>
+          <div class="fact">
+            <span class="fact-mark fact-mark--lines" aria-hidden="true"></span>
+            <p>Fine line<strong>Traço preciso</strong></p>
+          </div>
+        </aside>
+
+      </div>
+
+
+      <button class="reel-button" type="button" aria-label="Assistir ao vídeo do estúdio">
+        <span class="play">▶</span>
+      </button>
+
+
+      <div class="scroll-indicator">
+        <span>SCROLL</span>
+        <div></div>
+      </div>
+
+    </section>
+
+
+    <section class="work-section" id="work">
+      <span>01 / Trabalhos selecionados</span>
+
+      <h2>
+        ALGUMAS MARCAS
+        <br />
+        FORAM FEITAS
+        <br />
+        PARA FICAR.
+      </h2>
+    </section>
+
+  </main>
+
+  <script type="module" src="/src/main.js"></script>
+
+</body>
+</html>
