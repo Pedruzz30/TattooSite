@@ -1,5 +1,3 @@
-import "./style.css";
-
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -273,69 +271,4 @@ if (!prefersReducedMotion) {
       requestParallaxFrame();
     });
   }
-}
-
-/*
- * Menu e formulário ficam fora do bloco acima:
- * são funcionalidade, precisam rodar mesmo com movimento reduzido.
- */
-const menuButton = document.querySelector(".menu-button");
-const mobileMenu = document.querySelector("#mobile-menu");
-
-if (menuButton && mobileMenu) {
-  const setMenu = (open) => {
-    menuButton.setAttribute("aria-expanded", String(open));
-    menuButton.setAttribute("aria-label", open ? "Fechar menu" : "Abrir menu");
-    mobileMenu.hidden = !open;
-    document.body.style.overflow = open ? "hidden" : "";
-
-    if (open) {
-      mobileMenu.querySelector("a")?.focus();
-    } else {
-      menuButton.focus();
-    }
-  };
-
-  menuButton.addEventListener("click", () => {
-    setMenu(menuButton.getAttribute("aria-expanded") !== "true");
-  });
-
-  /* Link ou botão de fechar: os dois derrubam o overlay. */
-  mobileMenu.addEventListener("click", (event) => {
-    if (event.target.closest("a, .mobile-menu-close")) {
-      setMenu(false);
-    }
-  });
-
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && !mobileMenu.hidden) {
-      setMenu(false);
-    }
-  });
-}
-
-const contactForm = document.querySelector(".contact-form");
-
-if (contactForm) {
-  const status = contactForm.querySelector(".form-status");
-
-  contactForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    if (!contactForm.checkValidity()) {
-      status.dataset.state = "error";
-      status.textContent = "Preencha os campos obrigatórios antes de enviar.";
-      contactForm.reportValidity();
-      return;
-    }
-
-    /*
-     * RASCUNHO: não existe endpoint ainda.
-     * Trocar por fetch(action, { method: "POST", body: new FormData(contactForm) })
-     * quando o Formspree/backend estiver de pé.
-     */
-    delete status.dataset.state;
-    status.textContent =
-      "Formulário validado — mas ainda não existe endpoint, então nada foi enviado.";
-  });
 }

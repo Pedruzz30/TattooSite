@@ -26,7 +26,10 @@
     property="og:description"
     content="Blackwork, fine line e realismo no Rio de Janeiro. Projetos autorais desenhados do zero."
   />
-  <meta property="og:image" content="/src/assets/TintaTattooHero.img1.png" />
+  <meta
+    property="og:image"
+    content="/src/assets/images/hero/TintaTattooHero.img1.png"
+  />
   <meta name="twitter:card" content="summary_large_image" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,7 +40,8 @@
     rel="stylesheet"
   />
 
-  <link rel="stylesheet" href="/src/style.css" />
+  <link rel="stylesheet" href="/src/styles/main.css" />
+
 </head>
 
 <body>
@@ -56,7 +60,7 @@
       <div class="hero-ink" aria-hidden="true">
         <img
           class="hero-ink-image"
-          src="/src/assets/TintaTattooHero.img1.png"
+          src="/src/assets/images/hero/TintaTattooHero.img1.png"
           alt=""
           draggable="false"
         />
@@ -163,9 +167,9 @@
       </div>
 
 
-      <button class="reel-button" type="button" aria-label="Assistir ao vídeo do estúdio">
+      <a class="reel-button" href="#work" aria-label="Ver trabalhos selecionados">
         <span class="play">▶</span>
-      </button>
+      </a>
 
 
       <div class="scroll-indicator">
@@ -183,7 +187,7 @@
           <div class="machine-float">
             <img
               class="tattoo-machine"
-              src="/src/assets/TattooMachine.img.png"
+              src="/src/assets/images/hero/TattooMachine.img.png"
               alt=""
               draggable="false"
               loading="lazy"
@@ -217,7 +221,7 @@
 
       <!--
         Placeholder: troque cada <span class="work-tile-image ..."></span>
-        por <img class="work-tile-image" src="/src/assets/…" alt="…" loading="lazy" decoding="async" />
+        por <img class="work-tile-image" src="/src/assets/images/work/…" alt="…" loading="lazy" decoding="async" />
         e remova o modificador --0N do CSS quando a foto real entrar.
       -->
       <div class="work-gallery">
@@ -390,7 +394,7 @@
               aria-label="Retrato do tatuador segurando a máquina"
             ></span>
           </span>
-          <figcaption>Rio de Janeiro · desde 2015</figcaption>
+          <figcaption>Rio de Janeiro · desde 2019</figcaption>
         </figure>
 
         <div class="artist-bio">
@@ -413,7 +417,7 @@
 
           <ul class="artist-stats">
             <li>
-              <strong>10</strong>
+              <strong>7</strong>
               <span>anos de agulha</span>
             </li>
             <li>
@@ -761,6 +765,7 @@
     </div>
   </div>
 
+  <script type="module" src="/src/js/app.js"></script>
   <script type="module" src="/src/main.js"></script>
 
 </body>

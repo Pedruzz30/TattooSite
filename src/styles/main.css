@@ -307,8 +307,8 @@ button {
   background-size: 220% 100%;
   filter: blur(8px);
   mix-blend-mode: screen;
-  -webkit-mask: url("./assets/TattooMachine.img.png") center / contain no-repeat;
-  mask: url("./assets/TattooMachine.img.png") center / contain no-repeat;
+  -webkit-mask: url("../assets/images/hero/TattooMachine.img.png") center / contain no-repeat;
+  mask: url("../assets/images/hero/TattooMachine.img.png") center / contain no-repeat;
   animation: machine-light-sweep 7.5s ease-in-out infinite;
 }
 
