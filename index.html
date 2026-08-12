@@ -580,22 +580,74 @@
 
       <div class="contact-body">
 
-        <!--
-          RASCUNHO: o formulário ainda não envia para lugar nenhum.
-          Antes de publicar, aponte o action para um endpoint real
-          (Formspree, Basin, backend próprio) e troque o handler em main.js.
-        -->
+        <!-- O envio é preparado no frontend e concluído pelo cliente no WhatsApp. -->
         <form class="contact-form" action="#" method="post" novalidate>
+
+          <div class="form-honeypot" aria-hidden="true">
+            <input
+              type="text"
+              name="website"
+              tabindex="-1"
+              autocomplete="off"
+              aria-hidden="true"
+              data-honeypot
+            />
+          </div>
 
           <div class="field">
             <label for="field-name">Nome</label>
-            <input id="field-name" name="nome" type="text" autocomplete="name" required />
+            <input
+              id="field-name"
+              name="nome"
+              type="text"
+              autocomplete="name"
+              maxlength="80"
+              required
+            />
+          </div>
+
+          <div class="field">
+            <label for="field-project-type">Tipo de projeto</label>
+            <select
+              id="field-project-type"
+              name="tipoProjeto"
+              aria-controls="coverage-details"
+              required
+            >
+              <option value="">Selecione</option>
+              <option>Tatuagem nova</option>
+              <option>Cobertura</option>
+              <option>Continuação / fechamento</option>
+              <option>Retoque</option>
+            </select>
+          </div>
+
+          <div class="field" id="coverage-details" hidden>
+            <label for="field-tattoo-age">Há quanto tempo essa tatuagem foi feita?</label>
+            <input
+              id="field-tattoo-age"
+              name="tempoTatuagem"
+              type="text"
+              aria-describedby="coverage-help"
+              maxlength="80"
+              disabled
+            />
+            <p class="form-status" id="coverage-help">
+              Você poderá enviar uma foto da tatuagem atual pelo WhatsApp.
+            </p>
           </div>
 
           <div class="field-row">
             <div class="field">
               <label for="field-contact">WhatsApp ou e-mail</label>
-              <input id="field-contact" name="contato" type="text" autocomplete="email" required />
+              <input
+                id="field-contact"
+                name="contato"
+                type="text"
+                autocomplete="email"
+                maxlength="120"
+                required
+              />
             </div>
 
             <div class="field">
@@ -613,12 +665,24 @@
           <div class="field-row">
             <div class="field">
               <label for="field-place">Região do corpo</label>
-              <input id="field-place" name="regiao" type="text" placeholder="Antebraço, costas…" />
+              <input
+                id="field-place"
+                name="regiao"
+                type="text"
+                maxlength="100"
+                placeholder="Antebraço, costas…"
+              />
             </div>
 
             <div class="field">
               <label for="field-size">Tamanho aproximado</label>
-              <input id="field-size" name="tamanho" type="text" placeholder="15 cm, fechamento…" />
+              <input
+                id="field-size"
+                name="tamanho"
+                type="text"
+                maxlength="80"
+                placeholder="15 cm, fechamento…"
+              />
             </div>
           </div>
 
@@ -628,6 +692,7 @@
               id="field-idea"
               name="ideia"
               rows="5"
+              maxlength="1500"
               placeholder="O que a peça significa, referências que você curte, prazo que tem em mente."
               required
             ></textarea>
@@ -645,7 +710,32 @@
             <span>Enviar pedido</span>
           </button>
 
-          <p class="form-status" role="status" aria-live="polite"></p>
+          <p class="form-status" data-form-feedback>
+            <span role="status" aria-live="polite" data-form-status-message></span>
+            <button
+              class="form-status-action"
+              type="button"
+              data-confirm-submission
+              hidden
+            >
+              Já enviei meu projeto
+            </button>
+            <button
+              class="form-status-action"
+              type="button"
+              data-cancel-form-clear
+              hidden
+            >
+              Cancelar limpeza
+            </button>
+            <button
+              class="form-status-action"
+              type="button"
+              data-clear-form
+            >
+              Limpar formulário
+            </button>
+          </p>
         </form>
 
         <aside class="contact-aside">
