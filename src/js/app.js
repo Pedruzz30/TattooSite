@@ -1,10 +1,28 @@
+const FOCUSABLE_SELECTOR =
+  'a[href]:not([aria-disabled="true"]), button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+const trapFocusWithin = (container, event) => {
+  if (event.key !== "Tab") return;
+
+  const focusable = [...container.querySelectorAll(FOCUSABLE_SELECTOR)];
+  const first = focusable[0];
+  const last = focusable.at(-1);
+
+  if (!first || !last) return;
+
+  if (event.shiftKey && document.activeElement === first) {
+    event.preventDefault();
+    last.focus();
+  } else if (!event.shiftKey && document.activeElement === last) {
+    event.preventDefault();
+    first.focus();
+  }
+};
+
 const menuButton = document.querySelector(".menu-button");
 const mobileMenu = document.querySelector("#mobile-menu");
 
 if (menuButton && mobileMenu) {
-  const focusableSelector =
-    'a[href]:not([aria-disabled="true"]), button:not([disabled])';
-
   const setMenu = (open, { restoreFocus = true } = {}) => {
     menuButton.setAttribute("aria-expanded", String(open));
     menuButton.setAttribute("aria-label", open ? "Fechar menu" : "Abrir menu");
@@ -12,7 +30,7 @@ if (menuButton && mobileMenu) {
     document.body.style.overflow = open ? "hidden" : "";
 
     if (open) {
-      mobileMenu.querySelector(focusableSelector)?.focus();
+      mobileMenu.querySelector(FOCUSABLE_SELECTOR)?.focus();
     } else if (restoreFocus) {
       menuButton.focus();
     }
@@ -36,27 +54,232 @@ if (menuButton && mobileMenu) {
       return;
     }
 
-    if (event.key !== "Tab") return;
-
-    const focusable = [...mobileMenu.querySelectorAll(focusableSelector)];
-    const first = focusable[0];
-    const last = focusable.at(-1);
-
-    if (!first || !last) return;
-
-    if (event.shiftKey && document.activeElement === first) {
-      event.preventDefault();
-      last.focus();
-    } else if (!event.shiftKey && document.activeElement === last) {
-      event.preventDefault();
-      first.focus();
-    }
+    trapFocusWithin(mobileMenu, event);
   });
 
   window.addEventListener("resize", () => {
     if (window.innerWidth > 900 && !mobileMenu.hidden) {
       setMenu(false, { restoreFocus: false });
     }
+  });
+}
+
+/*
+ * O Vite só reescreve caminhos de assets que estão no HTML ou em
+ * new URL(..., import.meta.url). Caminhos soltos em string quebrariam
+ * no build publicado, que roda sob a base "/TattooSite/".
+ */
+const projectImage = (fileName) =>
+  new URL(`../assets/tattooIMG/${fileName}`, import.meta.url).href;
+
+const tattooProjects = {
+  "work-01": {
+    index: "01",
+    title: "Serpente ornamental",
+    style: "Blackwork",
+    year: "2025",
+    area: "Antebraço",
+    image: projectImage("SerpenteOrnamental.png"),
+    alt: "Tatuagem blackwork de serpente ornamental no antebraço",
+    description:
+      "Composição ornamental construída ao redor de uma serpente, com curvas fluidas e áreas densas de preto acompanhando o formato do antebraço."
+  },
+  "work-02": {
+    index: "02",
+    title: "Mapa do peito",
+    style: "Blackwork",
+    year: "2025",
+    area: "Peito e ombro",
+    image: projectImage("MapaPeito.png"),
+    alt: "Tatuagem blackwork ornamental cobrindo peito e ombro",
+    description:
+      "Projeto ornamental desenvolvido para acompanhar a anatomia do tórax, combinando mandala central, linhas geométricas e áreas de preto sólido."
+  },
+  "work-03": {
+    index: "03",
+    title: "Retrato em cinza",
+    style: "Realismo",
+    year: "2024",
+    area: "Coxa",
+    image: projectImage("RetratoCinza.png"),
+    alt: "Tatuagem realista em preto e cinza com retrato feminino",
+    description:
+      "Retrato em preto e cinza trabalhado com transições suaves, contraste controlado e atenção aos detalhes para preservar profundidade e expressão."
+  },
+  "work-04": {
+    index: "04",
+    title: "Linhas de mão",
+    style: "Fine line",
+    year: "2025",
+    area: "Mão e punho",
+    image: projectImage("LinhasMao.png"),
+    alt: "Tatuagem fine line delicada na mão e no punho",
+    description:
+      "Projeto minimalista de traço fino, desenhado para seguir de forma delicada a anatomia da mão e do punho."
+  },
+  "work-05": {
+    index: "05",
+    title: "Fluxo orgânico",
+    style: "Blackwork",
+    year: "2025",
+    area: "Costelas / lateral do torso",
+    image: projectImage("AsaFechada.png"),
+    alt: "Tatuagem blackwork orgânica acompanhando a lateral do torso",
+    description:
+      "Blackwork orgânico desenvolvido para acompanhar as curvas naturais do torso, alternando massas de preto e espaços negativos."
+  },
+  "work-06": {
+    index: "06",
+    title: "Braço completo",
+    style: "Projeto autoral",
+    year: "2025",
+    area: "Braço completo",
+    image: projectImage("FechamentoBraco.png"),
+    alt: "Tatuagem autoral cobrindo o braço completo",
+    description:
+      "Composição fechada de manga inteira, desenvolvida para criar continuidade visual entre ombro, braço e antebraço."
+  }
+};
+
+const projectLightbox = document.querySelector("[data-project-lightbox]");
+
+if (projectLightbox) {
+  const gallery = document.querySelector(".work-gallery");
+  const closeButton = projectLightbox.querySelector("[data-lightbox-close]");
+  const backdrop = projectLightbox.querySelector("[data-lightbox-backdrop]");
+  const media = projectLightbox.querySelector("[data-lightbox-media]");
+  const image = projectLightbox.querySelector("[data-lightbox-image]");
+  const fields = {
+    index: projectLightbox.querySelector("[data-lightbox-index]"),
+    title: projectLightbox.querySelector("[data-lightbox-title]"),
+    style: projectLightbox.querySelector("[data-lightbox-style]"),
+    year: projectLightbox.querySelector("[data-lightbox-year]"),
+    area: projectLightbox.querySelector("[data-lightbox-area]"),
+    description: projectLightbox.querySelector("[data-lightbox-description]")
+  };
+
+  let opener = null;
+  let previousBodyOverflow = "";
+
+  const setProjectZoom = (zoomed) => {
+    media.classList.toggle("is-zoomed", zoomed);
+    media.setAttribute("aria-pressed", String(zoomed));
+    media.setAttribute(
+      "aria-label",
+      zoomed ? "Reduzir imagem" : "Ampliar imagem"
+    );
+  };
+
+  const setZoomOrigin = (x, y) => {
+    media.style.setProperty("--zoom-origin-x", `${x}%`);
+    media.style.setProperty("--zoom-origin-y", `${y}%`);
+  };
+
+  const getPointerOrigin = (event) => {
+    const bounds = media.getBoundingClientRect();
+    const toPercentage = (position, start, size) =>
+      Math.min(100, Math.max(0, ((position - start) / size) * 100));
+
+    return [
+      toPercentage(event.clientX, bounds.left, bounds.width),
+      toPercentage(event.clientY, bounds.top, bounds.height)
+    ];
+  };
+
+  const resetProjectZoom = () => {
+    setProjectZoom(false);
+    setZoomOrigin(50, 50);
+  };
+
+  const populateProjectLightbox = (project) => {
+    image.src = project.image;
+    image.alt = project.alt;
+    fields.index.textContent = `${project.index} / 06`;
+    fields.title.textContent = project.title;
+    fields.style.textContent = project.style;
+    fields.year.textContent = project.year;
+    fields.area.textContent = project.area;
+    fields.description.textContent = project.description;
+  };
+
+  const openProjectLightbox = (projectId, trigger) => {
+    const project = tattooProjects[projectId];
+
+    if (!project) return;
+
+    populateProjectLightbox(project);
+    resetProjectZoom();
+    opener = trigger;
+    previousBodyOverflow = document.body.style.overflow;
+    projectLightbox.hidden = false;
+    projectLightbox.classList.add("is-open");
+    document.body.style.overflow = "hidden";
+    closeButton.focus();
+  };
+
+  const closeProjectLightbox = () => {
+    if (projectLightbox.hidden) return;
+
+    projectLightbox.classList.remove("is-open");
+    projectLightbox.hidden = true;
+    document.body.style.overflow = previousBodyOverflow;
+    resetProjectZoom();
+
+    const focusTarget = opener;
+    opener = null;
+    focusTarget?.focus();
+  };
+
+  gallery?.addEventListener("click", (event) => {
+    const trigger = event.target.closest("[data-project]");
+
+    if (!trigger) return;
+
+    event.preventDefault();
+    openProjectLightbox(trigger.dataset.project, trigger);
+  });
+
+  closeButton.addEventListener("click", closeProjectLightbox);
+  backdrop.addEventListener("click", closeProjectLightbox);
+
+  media.addEventListener("click", (event) => {
+    const zoomIn = !media.classList.contains("is-zoomed");
+
+    /*
+     * Amplia no ponto clicado (ou tocado). Ativação por teclado não traz
+     * coordenadas — detail é 0 — e mantém o centro da imagem.
+     */
+    if (zoomIn && event.detail > 0) {
+      setZoomOrigin(...getPointerOrigin(event));
+    }
+
+    setProjectZoom(zoomIn);
+  });
+
+  // O arrasto do dedo já é tratado pelo próprio toque: só o mouse navega assim.
+  media.addEventListener(
+    "pointermove",
+    (event) => {
+      if (
+        !media.classList.contains("is-zoomed") ||
+        event.pointerType === "touch"
+      ) {
+        return;
+      }
+
+      setZoomOrigin(...getPointerOrigin(event));
+    },
+    { passive: true }
+  );
+
+  projectLightbox.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      closeProjectLightbox();
+      return;
+    }
+
+    trapFocusWithin(projectLightbox, event);
   });
 }
 

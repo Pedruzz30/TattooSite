@@ -124,31 +124,43 @@
         </div>
 
         <article class="work-card work-card--one">
-          <div class="work-image work-image--one"></div>
+          <div class="work-image work-image--one">
+            <img
+              src="/src/assets/tattooIMG/SerpenteOrnamental.png"
+              alt=""
+              decoding="async"
+            />
+          </div>
 
           <div class="work-card-info">
             <span>Projeto autoral</span>
-            <strong>Realismo<br />sem limites.</strong>
+            <strong>Serpente<br />ornamental.</strong>
           </div>
 
-          <a href="#work" class="card-action card-action--light" aria-label="Ver projeto Blackwork">
+          <a href="#work-01" class="card-action card-action--light" aria-label="Ver projeto Serpente ornamental">
             <span class="dot-grid" aria-hidden="true"></span>
           </a>
         </article>
 
 
         <article class="work-card work-card--two">
-          <span>Projeto 02</span>
+          <span>Projeto 06</span>
 
           <h2>
-            Feita
+            Braço
             <br />
-            para ficar.
+            completo.
           </h2>
 
-          <div class="work-image work-image--two" aria-hidden="true"></div>
+          <div class="work-image work-image--two">
+            <img
+              src="/src/assets/tattooIMG/FechamentoBraco.png"
+              alt=""
+              decoding="async"
+            />
+          </div>
 
-          <a href="#work" class="card-action card-action--dark" aria-label="Ver projeto ornamental">
+          <a href="#work-06" class="card-action card-action--dark" aria-label="Ver projeto Braço completo">
             <span class="dot-grid" aria-hidden="true"></span>
           </a>
         </article>
@@ -219,27 +231,29 @@
         </p>
       </div>
 
-      <!--
-        Placeholder: troque cada <span class="work-tile-image ..."></span>
-        por <img class="work-tile-image" src="/src/assets/images/work/…" alt="…" loading="lazy" decoding="async" />
-        e remova o modificador --0N do CSS quando a foto real entrar.
-      -->
       <div class="work-gallery">
 
-        <article class="work-tile work-tile--01">
-          <a href="#work" class="work-tile-link" aria-labelledby="tile-01">
-            <span class="work-tile-media">
-              <span
-                class="work-tile-image work-tile-image--01"
-                role="img"
-                aria-label="Serpente ornamental em blackwork no antebraço"
-              ></span>
-            </span>
+        <article class="work-tile work-tile--01" id="work-01">
+          <div class="work-tile-link">
+            <a href="#work" class="work-tile-media" aria-labelledby="tile-01">
+              <img
+                class="work-tile-image"
+                src="/src/assets/tattooIMG/SerpenteOrnamental.png"
+                alt="Tatuagem blackwork de serpente ornamental no antebraço"
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
             <span class="work-tile-index" aria-hidden="true">01</span>
-            <span class="card-action card-action--light work-tile-view" aria-hidden="true">
-              <span class="dot-grid"></span>
-            </span>
-          </a>
+            <button
+              class="card-action card-action--light work-tile-view"
+              type="button"
+              data-project="work-01"
+              aria-label="Ver detalhes de Serpente ornamental"
+            >
+              <span class="dot-grid" aria-hidden="true"></span>
+            </button>
+          </div>
 
           <div class="work-tile-caption">
             <h3 id="tile-01">Serpente ornamental</h3>
@@ -248,19 +262,26 @@
         </article>
 
         <article class="work-tile work-tile--02">
-          <a href="#work" class="work-tile-link" aria-labelledby="tile-02">
-            <span class="work-tile-media">
-              <span
-                class="work-tile-image work-tile-image--02"
-                role="img"
-                aria-label="Fechamento de peito em blackwork"
-              ></span>
-            </span>
+          <div class="work-tile-link">
+            <a href="#work" class="work-tile-media" aria-labelledby="tile-02">
+              <img
+                class="work-tile-image"
+                src="/src/assets/tattooIMG/MapaPeito.png"
+                alt="Tatuagem blackwork ornamental cobrindo peito e ombro"
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
             <span class="work-tile-index" aria-hidden="true">02</span>
-            <span class="card-action card-action--light work-tile-view" aria-hidden="true">
-              <span class="dot-grid"></span>
-            </span>
-          </a>
+            <button
+              class="card-action card-action--light work-tile-view"
+              type="button"
+              data-project="work-02"
+              aria-label="Ver detalhes de Mapa do peito"
+            >
+              <span class="dot-grid" aria-hidden="true"></span>
+            </button>
+          </div>
 
           <div class="work-tile-caption">
             <h3 id="tile-02">Mapa do peito</h3>
@@ -269,19 +290,26 @@
         </article>
 
         <article class="work-tile work-tile--03">
-          <a href="#work" class="work-tile-link" aria-labelledby="tile-03">
-            <span class="work-tile-media">
-              <span
-                class="work-tile-image work-tile-image--03"
-                role="img"
-                aria-label="Retrato realista em tons de cinza"
-              ></span>
-            </span>
+          <div class="work-tile-link">
+            <a href="#work" class="work-tile-media" aria-labelledby="tile-03">
+              <img
+                class="work-tile-image"
+                src="/src/assets/tattooIMG/RetratoCinza.png"
+                alt="Tatuagem realista em preto e cinza com retrato feminino"
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
             <span class="work-tile-index" aria-hidden="true">03</span>
-            <span class="card-action card-action--light work-tile-view" aria-hidden="true">
-              <span class="dot-grid"></span>
-            </span>
-          </a>
+            <button
+              class="card-action card-action--light work-tile-view"
+              type="button"
+              data-project="work-03"
+              aria-label="Ver detalhes de Retrato em cinza"
+            >
+              <span class="dot-grid" aria-hidden="true"></span>
+            </button>
+          </div>
 
           <div class="work-tile-caption">
             <h3 id="tile-03">Retrato em cinza</h3>
@@ -290,19 +318,26 @@
         </article>
 
         <article class="work-tile work-tile--04">
-          <a href="#work" class="work-tile-link" aria-labelledby="tile-04">
-            <span class="work-tile-media">
-              <span
-                class="work-tile-image work-tile-image--04"
-                role="img"
-                aria-label="Traços finos na lateral da mão"
-              ></span>
-            </span>
+          <div class="work-tile-link">
+            <a href="#work" class="work-tile-media" aria-labelledby="tile-04">
+              <img
+                class="work-tile-image"
+                src="/src/assets/tattooIMG/LinhasMao.png"
+                alt="Tatuagem fine line delicada na mão e no punho"
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
             <span class="work-tile-index" aria-hidden="true">04</span>
-            <span class="card-action card-action--light work-tile-view" aria-hidden="true">
-              <span class="dot-grid"></span>
-            </span>
-          </a>
+            <button
+              class="card-action card-action--light work-tile-view"
+              type="button"
+              data-project="work-04"
+              aria-label="Ver detalhes de Linhas de mão"
+            >
+              <span class="dot-grid" aria-hidden="true"></span>
+            </button>
+          </div>
 
           <div class="work-tile-caption">
             <h3 id="tile-04">Linhas de mão</h3>
@@ -311,40 +346,54 @@
         </article>
 
         <article class="work-tile work-tile--05">
-          <a href="#work" class="work-tile-link" aria-labelledby="tile-05">
-            <span class="work-tile-media">
-              <span
-                class="work-tile-image work-tile-image--05"
-                role="img"
-                aria-label="Asa fechada em preto sólido no ombro"
-              ></span>
-            </span>
+          <div class="work-tile-link">
+            <a href="#work" class="work-tile-media" aria-labelledby="tile-05">
+              <img
+                class="work-tile-image"
+                src="/src/assets/tattooIMG/AsaFechada.png"
+                alt="Tatuagem blackwork orgânica acompanhando a lateral do torso"
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
             <span class="work-tile-index" aria-hidden="true">05</span>
-            <span class="card-action card-action--light work-tile-view" aria-hidden="true">
-              <span class="dot-grid"></span>
-            </span>
-          </a>
+            <button
+              class="card-action card-action--light work-tile-view"
+              type="button"
+              data-project="work-05"
+              aria-label="Ver detalhes de Fluxo orgânico"
+            >
+              <span class="dot-grid" aria-hidden="true"></span>
+            </button>
+          </div>
 
           <div class="work-tile-caption">
-            <h3 id="tile-05">Asa fechada</h3>
-            <span>Blackwork · 2024</span>
+            <h3 id="tile-05">Fluxo orgânico</h3>
+            <span>Blackwork · 2025</span>
           </div>
         </article>
 
-        <article class="work-tile work-tile--06">
-          <a href="#work" class="work-tile-link" aria-labelledby="tile-06">
-            <span class="work-tile-media">
-              <span
-                class="work-tile-image work-tile-image--06"
-                role="img"
-                aria-label="Braço fechado com projeto autoral"
-              ></span>
-            </span>
+        <article class="work-tile work-tile--06" id="work-06">
+          <div class="work-tile-link">
+            <a href="#work" class="work-tile-media" aria-labelledby="tile-06">
+              <img
+                class="work-tile-image"
+                src="/src/assets/tattooIMG/FechamentoBraco.png"
+                alt="Tatuagem autoral cobrindo o braço completo"
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
             <span class="work-tile-index" aria-hidden="true">06</span>
-            <span class="card-action card-action--light work-tile-view" aria-hidden="true">
-              <span class="dot-grid"></span>
-            </span>
-          </a>
+            <button
+              class="card-action card-action--light work-tile-view"
+              type="button"
+              data-project="work-06"
+              aria-label="Ver detalhes de Braço completo"
+            >
+              <span class="dot-grid" aria-hidden="true"></span>
+            </button>
+          </div>
 
           <div class="work-tile-caption">
             <h3 id="tile-06">Braço completo</h3>
@@ -852,6 +901,62 @@
     <div class="mobile-menu-foot">
       <a href="#">Instagram</a>
       <a href="#">WhatsApp</a>
+    </div>
+  </div>
+
+  <div
+    class="project-lightbox"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="project-lightbox-title"
+    aria-describedby="project-lightbox-description"
+    data-project-lightbox
+    hidden
+  >
+    <div class="project-lightbox-backdrop" data-lightbox-backdrop aria-hidden="true"></div>
+
+    <div class="project-lightbox-panel">
+      <button
+        class="project-lightbox-close"
+        type="button"
+        aria-label="Fechar projeto"
+        data-lightbox-close
+      >
+        <span aria-hidden="true">×</span>
+      </button>
+
+      <button
+        class="project-lightbox-media"
+        type="button"
+        aria-label="Ampliar imagem"
+        aria-pressed="false"
+        data-lightbox-media
+      >
+        <img src="" alt="" decoding="async" data-lightbox-image />
+      </button>
+
+      <div class="project-lightbox-info">
+        <p class="project-lightbox-index" data-lightbox-index></p>
+        <h2 id="project-lightbox-title" data-lightbox-title></h2>
+        <p class="project-lightbox-meta">
+          <span data-lightbox-style></span>
+          <span aria-hidden="true">·</span>
+          <span data-lightbox-year></span>
+        </p>
+
+        <dl class="project-lightbox-details">
+          <div>
+            <dt>Região</dt>
+            <dd data-lightbox-area></dd>
+          </div>
+        </dl>
+
+        <p
+          class="project-lightbox-description"
+          id="project-lightbox-description"
+          data-lightbox-description
+        ></p>
+      </div>
     </div>
   </div>
 

@@ -370,6 +370,14 @@ button {
 
 .work-image {
   position: absolute;
+  overflow: hidden;
+}
+
+.work-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .work-image--one {
@@ -378,9 +386,6 @@ button {
   width: 74%;
   height: 66%;
   border-bottom-left-radius: 70% 46%;
-  background:
-    linear-gradient(132deg, transparent 18%, rgba(255, 255, 255, 0.12) 19%, transparent 20%),
-    radial-gradient(circle at 76% 22%, #6d6d69 0, #30302f 34%, #111 70%);
 }
 
 .work-card-info {
@@ -436,13 +441,6 @@ button {
   inset: auto 0 0;
   width: 100%;
   height: 52%;
-  background:
-    repeating-radial-gradient(
-      ellipse at 52% 108%,
-      #171717 0 7px,
-      #4d4d4b 8px 14px,
-      #202020 15px 22px
-    );
 }
 
 .card-action {
@@ -766,44 +764,13 @@ button {
 }
 
 .work-tile-link:hover .work-tile-image,
-.work-tile-link:focus-visible .work-tile-image {
+.work-tile-link:focus-within .work-tile-image {
   filter: grayscale(0.5) brightness(1) contrast(1.14);
   transform: scale(1.07);
 }
 
-/* Placeholders — remover quando as fotos reais entrarem. */
-.work-tile-image--01 {
-  background:
-    linear-gradient(128deg, transparent 30%, rgba(255, 255, 255, 0.1) 31%, transparent 33%),
-    radial-gradient(circle at 62% 26%, #6f6f6a 0, #34342f 36%, #0f0f0f 74%);
-}
-
-.work-tile-image--02 {
-  background:
-    repeating-linear-gradient(74deg, rgba(255, 255, 255, 0.05) 0 2px, transparent 2px 16px),
-    radial-gradient(ellipse at 30% 70%, #4b4b47 0, #1d1d1b 46%, #0c0c0c 80%);
-}
-
-.work-tile-image--03 {
-  background:
-    radial-gradient(circle at 50% 34%, #8a8a84 0, #3a3a36 30%, #141413 66%, #0a0a0a 100%);
-}
-
-.work-tile-image--04 {
-  background:
-    repeating-conic-gradient(from 12deg at 46% 54%, rgba(255, 255, 255, 0.07) 0 1deg, transparent 1deg 18deg),
-    radial-gradient(circle at 46% 54%, #5d5d58 0, #232320 44%, #0d0d0d 82%);
-}
-
-.work-tile-image--05 {
-  background:
-    repeating-radial-gradient(ellipse at 50% 104%, #151515 0 8px, #4a4a47 9px 15px, #1c1c1a 16px 24px);
-}
-
-.work-tile-image--06 {
-  background:
-    linear-gradient(96deg, rgba(255, 255, 255, 0.08) 0 12%, transparent 40%),
-    radial-gradient(ellipse at 74% 40%, #6a6a64 0, #2b2b27 38%, #0b0b0b 76%);
+.work-tile--06 .work-tile-image {
+  object-position: center 32%;
 }
 
 .work-tile-index {
@@ -819,7 +786,10 @@ button {
 .work-tile-view {
   right: 24px;
   bottom: 24px;
+  padding: 0;
+  border: 0;
   opacity: 0;
+  cursor: pointer;
   transform: scale(0.75);
   transition:
     opacity 0.4s ease,
@@ -827,7 +797,8 @@ button {
 }
 
 .work-tile-link:hover .work-tile-view,
-.work-tile-link:focus-visible .work-tile-view {
+.work-tile-link:focus-within .work-tile-view,
+.work-tile-view:focus-visible {
   opacity: 1;
   transform: none;
 }
@@ -853,6 +824,226 @@ button {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   white-space: nowrap;
+}
+
+.project-lightbox[hidden] {
+  display: none;
+}
+
+.project-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: clamp(18px, 2.5vw, 40px);
+  background: #080808;
+  color: #f1f0eb;
+  isolation: isolate;
+}
+
+.project-lightbox-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: rgba(0, 0, 0, 0.94);
+}
+
+/*
+ * A coluna da mídia se ajusta ao formato retrato das fotos (ver
+ * --media-ratio) em vez de esticar: o painel encolhe junto e não sobra
+ * barra preta dos lados da tatuagem.
+ */
+.project-lightbox-panel {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: auto minmax(280px, 420px);
+  width: fit-content;
+  max-width: min(1560px, 100%);
+  min-height: calc(100svh - clamp(36px, 5vw, 80px));
+  margin: auto;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+.project-lightbox.is-open .project-lightbox-backdrop {
+  animation: project-lightbox-fade 320ms ease both;
+}
+
+.project-lightbox.is-open .project-lightbox-panel {
+  animation: project-lightbox-enter 320ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.project-lightbox-close {
+  position: fixed;
+  top: clamp(30px, 3.5vw, 56px);
+  right: clamp(30px, 3.5vw, 56px);
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 50%;
+  background: rgba(8, 8, 8, 0.76);
+  color: #f1f0eb;
+  font-size: 28px;
+  font-weight: 300;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.project-lightbox-media {
+  --zoom-origin-x: 50%;
+  --zoom-origin-y: 50%;
+  /* Formato retrato das fotos do portfólio: 1086x1448 e 1024x1536. */
+  --media-ratio: 0.75;
+  --media-height: calc(100svh - clamp(36px, 5vw, 80px));
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  width: calc(var(--media-height) * var(--media-ratio));
+  max-width: 100%;
+  height: var(--media-height);
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  background: #050505;
+  cursor: zoom-in;
+  touch-action: manipulation;
+}
+
+.project-lightbox-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  transform: scale(1);
+  transform-origin: var(--zoom-origin-x) var(--zoom-origin-y);
+  transition: transform 360ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-lightbox-media.is-zoomed {
+  cursor: zoom-out;
+}
+
+.project-lightbox-media.is-zoomed img {
+  transform: scale(1.85);
+}
+
+.project-lightbox-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-width: 0;
+  padding: clamp(72px, 7vw, 116px) clamp(28px, 4vw, 64px) clamp(38px, 5vw, 76px);
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.project-lightbox-index,
+.project-lightbox-meta,
+.project-lightbox-details dt {
+  color: rgba(255, 255, 255, 0.48);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.project-lightbox-info h2 {
+  margin-top: 22px;
+  font-size: clamp(38px, 4.4vw, 72px);
+  font-weight: 300;
+  letter-spacing: -0.055em;
+  line-height: 0.92;
+  text-transform: uppercase;
+}
+
+.project-lightbox-meta {
+  display: flex;
+  gap: 8px;
+  margin-top: 30px;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.project-lightbox-details {
+  margin-top: clamp(46px, 6vw, 84px);
+}
+
+.project-lightbox-details > div {
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.project-lightbox-details dd {
+  margin-top: 9px;
+  font-size: 15px;
+}
+
+.project-lightbox-description {
+  margin-top: 28px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+@keyframes project-lightbox-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes project-lightbox-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .project-lightbox {
+    padding: 0;
+  }
+
+  .project-lightbox-panel {
+    grid-template-columns: 1fr;
+    width: 100%;
+    min-height: 100svh;
+  }
+
+  .project-lightbox-close {
+    top: 18px;
+    right: 18px;
+  }
+
+  /* Numa coluna só, a mídia volta a ocupar a largura inteira da tela. */
+  .project-lightbox-media {
+    --media-height: min(68svh, 720px);
+    width: 100%;
+  }
+
+  .project-lightbox-info {
+    min-height: 42svh;
+    padding: 54px 24px 64px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    border-left: 0;
+  }
+
+  .project-lightbox-info h2 {
+    max-width: 12ch;
+  }
 }
 
 .work-footer {
@@ -2103,6 +2294,15 @@ button {
   }
 
   .work-tile-view {
+    transition: none;
+  }
+
+  .project-lightbox.is-open .project-lightbox-backdrop,
+  .project-lightbox.is-open .project-lightbox-panel {
+    animation: none;
+  }
+
+  .project-lightbox-media img {
     transition: none;
   }
 }
