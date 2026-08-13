@@ -235,7 +235,7 @@
 
         <article class="work-tile work-tile--01" id="work-01">
           <div class="work-tile-link">
-            <a href="#work" class="work-tile-media" aria-labelledby="tile-01">
+            <div class="work-tile-media" data-project="work-01">
               <img
                 class="work-tile-image"
                 src="/src/assets/tattooIMG/SerpenteOrnamental.png"
@@ -243,7 +243,7 @@
                 loading="lazy"
                 decoding="async"
               />
-            </a>
+            </div>
             <span class="work-tile-index" aria-hidden="true">01</span>
             <button
               class="card-action card-action--light work-tile-view"
@@ -263,7 +263,7 @@
 
         <article class="work-tile work-tile--02">
           <div class="work-tile-link">
-            <a href="#work" class="work-tile-media" aria-labelledby="tile-02">
+            <div class="work-tile-media" data-project="work-02">
               <img
                 class="work-tile-image"
                 src="/src/assets/tattooIMG/MapaPeito.png"
@@ -271,7 +271,7 @@
                 loading="lazy"
                 decoding="async"
               />
-            </a>
+            </div>
             <span class="work-tile-index" aria-hidden="true">02</span>
             <button
               class="card-action card-action--light work-tile-view"
@@ -291,7 +291,7 @@
 
         <article class="work-tile work-tile--03">
           <div class="work-tile-link">
-            <a href="#work" class="work-tile-media" aria-labelledby="tile-03">
+            <div class="work-tile-media" data-project="work-03">
               <img
                 class="work-tile-image"
                 src="/src/assets/tattooIMG/RetratoCinza.png"
@@ -299,7 +299,7 @@
                 loading="lazy"
                 decoding="async"
               />
-            </a>
+            </div>
             <span class="work-tile-index" aria-hidden="true">03</span>
             <button
               class="card-action card-action--light work-tile-view"
@@ -319,7 +319,7 @@
 
         <article class="work-tile work-tile--04">
           <div class="work-tile-link">
-            <a href="#work" class="work-tile-media" aria-labelledby="tile-04">
+            <div class="work-tile-media" data-project="work-04">
               <img
                 class="work-tile-image"
                 src="/src/assets/tattooIMG/LinhasMao.png"
@@ -327,7 +327,7 @@
                 loading="lazy"
                 decoding="async"
               />
-            </a>
+            </div>
             <span class="work-tile-index" aria-hidden="true">04</span>
             <button
               class="card-action card-action--light work-tile-view"
@@ -347,7 +347,7 @@
 
         <article class="work-tile work-tile--05">
           <div class="work-tile-link">
-            <a href="#work" class="work-tile-media" aria-labelledby="tile-05">
+            <div class="work-tile-media" data-project="work-05">
               <img
                 class="work-tile-image"
                 src="/src/assets/tattooIMG/AsaFechada.png"
@@ -355,7 +355,7 @@
                 loading="lazy"
                 decoding="async"
               />
-            </a>
+            </div>
             <span class="work-tile-index" aria-hidden="true">05</span>
             <button
               class="card-action card-action--light work-tile-view"
@@ -375,7 +375,7 @@
 
         <article class="work-tile work-tile--06" id="work-06">
           <div class="work-tile-link">
-            <a href="#work" class="work-tile-media" aria-labelledby="tile-06">
+            <div class="work-tile-media" data-project="work-06">
               <img
                 class="work-tile-image"
                 src="/src/assets/tattooIMG/FechamentoBraco.png"
@@ -383,7 +383,7 @@
                 loading="lazy"
                 decoding="async"
               />
-            </a>
+            </div>
             <span class="work-tile-index" aria-hidden="true">06</span>
             <button
               class="card-action card-action--light work-tile-view"
@@ -428,20 +428,22 @@
         </div>
 
         <h2 id="artist-title">
-          NOME
+          PEDRO
           <br />
-          SOBRENOME.
+          PIMENTA.
         </h2>
       </div>
 
       <div class="artist-intro">
         <figure class="artist-portrait">
           <span class="artist-portrait-media">
-            <span
+            <img
               class="artist-portrait-image"
-              role="img"
-              aria-label="Retrato do tatuador segurando a máquina"
-            ></span>
+              src="/src/assets/images/hero/TatuadorIMG.png"
+              alt="Tatuador trabalhando em uma tatuagem"
+              loading="lazy"
+              decoding="async"
+            />
           </span>
           <figcaption>Rio de Janeiro · desde 2019</figcaption>
         </figure>
@@ -528,11 +530,13 @@
 
       <div class="artist-studio">
         <div class="studio-media">
-          <span
+          <img
             class="studio-image"
-            role="img"
-            aria-label="Sala do estúdio com uma única cadeira de tatuagem"
-          ></span>
+            src="/src/assets/images/hero/EstudioTattooIMG.png"
+            alt="Sala do estúdio com uma cadeira de tatuagem"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
 
         <div class="studio-info">

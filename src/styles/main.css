@@ -30,6 +30,9 @@ button {
 }
 
 .hero {
+  --ink-light-x: 50%;
+  --ink-light-y: 46%;
+  --ink-light-strength: 0.16;
   position: relative;
   min-height: 100svh;
   overflow: hidden;
@@ -48,20 +51,118 @@ button {
   bottom: 0;
   left: 42%;
   z-index: 3;
+  isolation: isolate;
   width: max(115vw, 1280px);
   pointer-events: none;
   transform: translate3d(-50%, 30%, 0);
   user-select: none;
 }
 
+.hero-ink::before,
+.hero-ink::after {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  content: "";
+  pointer-events: none;
+  transform-origin: center;
+  -webkit-mask-image: url("../assets/images/hero/TintaTattooHero.img1.png");
+  mask-image: url("../assets/images/hero/TintaTattooHero.img1.png");
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  will-change: opacity, background-position, scale;
+}
+
+/* Luz ambiente: acompanha pouco o cursor para sugerir uma superfície viscosa. */
+.hero-ink::before {
+  background: radial-gradient(
+    ellipse 28% 36% at var(--ink-light-x) var(--ink-light-y),
+    rgba(255, 255, 255, 0.11) 0%,
+    rgba(255, 255, 255, 0.035) 32%,
+    transparent 70%
+  );
+  mix-blend-mode: screen;
+  opacity: var(--ink-light-strength);
+  animation: ink-breath 12s ease-in-out infinite;
+}
+
+/* Faixa de brilho com pausa entre passagens, contida pela silhueta da tinta. */
+.hero-ink::after {
+  background: linear-gradient(
+    115deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.012) 32%,
+    rgba(255, 255, 255, 0.06) 44%,
+    rgba(255, 255, 255, 0.105) 49%,
+    rgba(255, 255, 255, 0.038) 57%,
+    transparent 73%
+  );
+  background-position: 165% 50%;
+  background-size: 235% 100%;
+  mix-blend-mode: screen;
+  opacity: 0;
+  animation:
+    ink-shine 12.8s cubic-bezier(0.4, 0, 0.2, 1) infinite,
+    ink-breath 12s ease-in-out infinite;
+}
+
 .hero-ink-image {
+  position: relative;
+  z-index: 0;
   display: block;
   width: 100%;
   height: auto;
   opacity: 0.94;
+  transform-origin: center;
   filter:
-    contrast(1.06)
-    drop-shadow(0 -18px 36px rgba(0, 0, 0, 0.24));
+    contrast(1.07)
+    drop-shadow(0 -18px 36px rgba(0, 0, 0, 0.24))
+    drop-shadow(0 17px 17px rgba(0, 0, 0, 0.22))
+    drop-shadow(0 5px 8px rgba(0, 0, 0, 0.14));
+  animation: ink-breath 12s ease-in-out infinite;
+  will-change: scale;
+}
+
+@keyframes ink-shine {
+  0%,
+  24% {
+    opacity: 0;
+    background-position: 165% 50%;
+  }
+
+  38% {
+    opacity: 0.34;
+  }
+
+  56% {
+    opacity: 0.48;
+  }
+
+  68% {
+    opacity: 0.16;
+    background-position: -65% 50%;
+  }
+
+  76%,
+  100% {
+    opacity: 0;
+    background-position: -65% 50%;
+  }
+}
+
+@keyframes ink-breath {
+  0%,
+  100% {
+    scale: 1;
+  }
+
+  50% {
+    scale: 1.004;
+  }
 }
 
 .hero-grid {
@@ -724,6 +825,7 @@ button {
 .work-tile-media {
   display: block;
   overflow: hidden;
+  cursor: pointer;
   border-radius: 40px;
   background: #101010;
   /* Estado final da máscara de reveal — o GSAP precisa de um inset() para interpolar. */
@@ -1110,19 +1212,6 @@ button {
   height: 100%;
   object-fit: cover;
   filter: grayscale(1) brightness(0.94) contrast(1.06);
-}
-
-/* Placeholders — remover quando as fotos reais entrarem. */
-.artist-portrait-image {
-  background:
-    linear-gradient(198deg, rgba(255, 255, 255, 0.12) 0 16%, transparent 44%),
-    radial-gradient(ellipse at 52% 30%, #7d7d76 0, #3a3a35 34%, #131312 72%, #0a0a0a 100%);
-}
-
-.studio-image {
-  background:
-    repeating-linear-gradient(88deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 22px),
-    radial-gradient(ellipse at 34% 62%, #6b6b64 0, #262622 42%, #0c0c0c 82%);
 }
 
 .artist-portrait figcaption {
@@ -2272,6 +2361,19 @@ button {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .hero-ink-image,
+  .hero-ink::before,
+  .hero-ink::after {
+    scale: 1;
+    animation: none;
+    will-change: auto;
+  }
+
+  .hero-ink::after {
+    opacity: 0.18;
+    background-position: 50% 50%;
+  }
+
   .machine-visual {
     transform: rotate(10deg);
     transition: none;

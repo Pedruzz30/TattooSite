@@ -236,7 +236,17 @@ if (projectLightbox) {
     if (!trigger) return;
 
     event.preventDefault();
-    openProjectLightbox(trigger.dataset.project, trigger);
+
+    /*
+     * A foto do tile é alvo de clique só para o mouse. Quem recebe o foco
+     * de volta ao fechar é sempre o botão do tile — o único focável — para
+     * o Tab não recomeçar do topo da página.
+     */
+    const focusTarget = trigger.matches(FOCUSABLE_SELECTOR)
+      ? trigger
+      : trigger.closest(".work-tile")?.querySelector(FOCUSABLE_SELECTOR);
+
+    openProjectLightbox(trigger.dataset.project, focusTarget ?? null);
   });
 
   closeButton.addEventListener("click", closeProjectLightbox);

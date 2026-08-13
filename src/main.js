@@ -7,6 +7,102 @@ const prefersReducedMotion =
   window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
   new URLSearchParams(window.location.search).has("reduced-motion");
 
+const hero = document.querySelector(".hero");
+const hasFinePointer = window.matchMedia("(pointer: fine)").matches;
+
+if (hero && hasFinePointer && !prefersReducedMotion) {
+  let heroBounds = null;
+  let animationFrame = null;
+  let pointerInside = false;
+
+  const currentLight = { x: 50, y: 46, strength: 0.16 };
+  const targetLight = { x: 50, y: 46, strength: 0.16 };
+
+  const clamp = (value, minimum, maximum) =>
+    Math.min(Math.max(value, minimum), maximum);
+
+  const renderInkLight = () => {
+    const easing = pointerInside ? 0.1 : 0.055;
+
+    currentLight.x += (targetLight.x - currentLight.x) * easing;
+    currentLight.y += (targetLight.y - currentLight.y) * easing;
+    currentLight.strength +=
+      (targetLight.strength - currentLight.strength) * easing;
+
+    hero.style.setProperty("--ink-light-x", `${currentLight.x.toFixed(2)}%`);
+    hero.style.setProperty("--ink-light-y", `${currentLight.y.toFixed(2)}%`);
+    hero.style.setProperty(
+      "--ink-light-strength",
+      currentLight.strength.toFixed(3)
+    );
+
+    const isSettling =
+      Math.abs(targetLight.x - currentLight.x) > 0.02 ||
+      Math.abs(targetLight.y - currentLight.y) > 0.02 ||
+      Math.abs(targetLight.strength - currentLight.strength) > 0.002;
+
+    animationFrame = isSettling
+      ? requestAnimationFrame(renderInkLight)
+      : null;
+  };
+
+  const requestInkLightFrame = () => {
+    if (animationFrame === null) {
+      animationFrame = requestAnimationFrame(renderInkLight);
+    }
+  };
+
+  const updateInkLightTarget = (event) => {
+    if (!heroBounds) {
+      heroBounds = hero.getBoundingClientRect();
+    }
+
+    const cursorX = clamp(
+      (event.clientX - heroBounds.left) / heroBounds.width,
+      0,
+      1
+    );
+    const cursorY = clamp(
+      (event.clientY - heroBounds.top) / heroBounds.height,
+      0,
+      1
+    );
+
+    /*
+     * O intervalo é intencionalmente curto: a luz muda de ângulo,
+     * mas não se comporta como um spotlight seguindo o cursor.
+     */
+    targetLight.x = 42 + cursorX * 16;
+    targetLight.y = 40 + cursorY * 12;
+    targetLight.strength = 0.34;
+    requestInkLightFrame();
+  };
+
+  hero.addEventListener("pointerenter", (event) => {
+    pointerInside = true;
+    heroBounds = hero.getBoundingClientRect();
+    updateInkLightTarget(event);
+  });
+
+  hero.addEventListener("pointermove", updateInkLightTarget, { passive: true });
+
+  hero.addEventListener("pointerleave", () => {
+    pointerInside = false;
+    targetLight.x = 50;
+    targetLight.y = 46;
+    targetLight.strength = 0.12;
+    requestInkLightFrame();
+  });
+
+  window.addEventListener(
+    "resize",
+    () => {
+      heroBounds = pointerInside ? hero.getBoundingClientRect() : null;
+    },
+    { passive: true }
+  );
+}
+
 if (!prefersReducedMotion) {
   const intro = gsap.timeline({
     defaults: {
