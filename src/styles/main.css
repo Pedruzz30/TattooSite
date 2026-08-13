@@ -1176,6 +1176,18 @@ button {
   color: #14140f;
 }
 
+/*
+  As opacidades aqui são calculadas para o texto #14140f sobre o papel
+  #eae8e2 passar de 4,5:1 (WCAG AA) — em 10px o valor global de 0,4 dava 2,5:1.
+*/
+.artist-section .section-label {
+  opacity: 0.72;
+}
+
+.artist-section .section-label--muted {
+  opacity: 0.6;
+}
+
 .artist-head h2 {
   margin-top: 72px;
   font-size: clamp(46px, 7.4vw, 112px);
@@ -1184,16 +1196,22 @@ button {
   line-height: 0.86;
 }
 
+/*
+  Alinhado pelo topo: o lead começa na mesma linha da foto, logo abaixo do
+  H2. Alinhar pela base empurrava o texto para baixo e abria um vão de
+  250px entre o título e a bio.
+*/
 .artist-intro {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  align-items: end;
+  align-items: start;
   gap: 2.2vw;
   margin-top: 104px;
 }
 
+/* Termina junto da régua central que o fundo da seção já desenha. */
 .artist-portrait {
-  grid-column: 1 / 6;
+  grid-column: 1 / 7;
 }
 
 .artist-portrait-media {
@@ -1218,7 +1236,7 @@ button {
   margin-top: 20px;
   padding-top: 16px;
   border-top: 1px solid var(--rule);
-  opacity: 0.5;
+  opacity: 0.66;
   font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -1226,7 +1244,6 @@ button {
 
 .artist-bio {
   grid-column: 7 / 13;
-  padding-bottom: 6px;
 }
 
 .artist-lead {
@@ -1262,7 +1279,7 @@ button {
 .artist-stats span {
   display: block;
   margin-top: 8px;
-  opacity: 0.5;
+  opacity: 0.66;
   font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -1287,7 +1304,7 @@ button {
 
 .process-number {
   display: block;
-  opacity: 0.35;
+  opacity: 0.6;
   font-size: 11px;
   letter-spacing: 0.22em;
 }
@@ -1357,7 +1374,7 @@ button {
 }
 
 .studio-details dt {
-  opacity: 0.45;
+  opacity: 0.66;
   font-size: 10px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -1389,7 +1406,7 @@ button {
 }
 
 .social-index {
-  opacity: 0.35;
+  opacity: 0.6;
   font-size: 11px;
   letter-spacing: 0.2em;
 }
@@ -1401,7 +1418,7 @@ button {
 }
 
 .social-handle {
-  opacity: 0.5;
+  opacity: 0.66;
   font-size: 12px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
