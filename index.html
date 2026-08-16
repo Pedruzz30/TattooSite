@@ -14,10 +14,8 @@
   <link rel="icon" href="%BASE_URL%favicon.svg" type="image/svg+xml" />
   <meta name="theme-color" content="#090909" />
 
-  <!--
-    RASCUNHO: og:url e og:image precisam de URL absoluta para o preview
-    funcionar no Instagram e no WhatsApp. Trocar pelo domínio real.
-  -->
+  <link rel="canonical" href="https://pedruzz30.github.io/TattooSite/" />
+
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="pt_BR" />
   <meta property="og:site_name" content="INK Estúdio" />
@@ -26,10 +24,21 @@
     property="og:description"
     content="Blackwork, fine line e realismo no Rio de Janeiro. Projetos autorais desenhados do zero."
   />
+  <meta property="og:url" content="https://pedruzz30.github.io/TattooSite/" />
+  <!--
+    Precisa ser URL absoluta (não "/src/...") porque o Vite não reescreve
+    caminhos dentro de meta[content] no build — e crawlers de redes sociais
+    (WhatsApp, Instagram) não seguem redirect nem resolvem caminho relativo.
+    A imagem em si vive em /public/og-image.jpg (1200x800, cai fora do
+    pipeline de assets do src/ e é copiada como está para o build).
+  -->
   <meta
     property="og:image"
-    content="/src/assets/images/hero/TintaTattooHero.img1.png"
+    content="https://pedruzz30.github.io/TattooSite/og-image.jpg"
   />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="800" />
   <meta name="twitter:card" content="summary_large_image" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -446,8 +455,10 @@
 
 
     <!--
-      RASCUNHO: artista, endereço, números e @ são fictícios.
-      Trocar antes de qualquer publicação — inclusive os href="#" das redes.
+      RASCUNHO: nome do artista já é real (Pedro Pimenta). Endereço, números
+      da bio (7 anos / +900 projetos / 90 dias) e os @ de redes sociais ainda
+      são fictícios — trocar antes de qualquer publicação, inclusive os
+      href="#" das redes (Instagram, TikTok, e-mail) mais abaixo e no rodapé.
     -->
     <section class="artist-section" id="artist" aria-labelledby="artist-title">
 

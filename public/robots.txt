@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pedruzz30.github.io/TattooSite/sitemap.xml
