@@ -1,9 +1,11 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { initInk } from "./js/effects/ink.js";
+import { initFluidBackground } from "./js/effects/fluidbackground.js";
 
 gsap.registerPlugin(ScrollTrigger);
 
+initFluidBackground();
 initInk();
 
 const prefersReducedMotion =

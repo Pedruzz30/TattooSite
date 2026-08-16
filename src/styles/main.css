@@ -47,6 +47,21 @@ button {
 }
 
 /*
+ * Canvas do shader de fluido (Three.js). É a camada mais ao fundo:
+ * cobre o gradiente estático do .hero, que continua servindo de
+ * fallback instantâneo enquanto o WebGL inicializa — ou permanente,
+ * se prefers-reduced-motion estiver ativo e o script nem rodar.
+ */
+.hero-fluid-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/*
  * Canvas de fundo com manchas de tinta se movendo lentamente.
  * Fica atrás de .hero-ink (a máscara de luz que reage ao mouse),
  * dando profundidade sem precisar de vídeo — é só matemática,
