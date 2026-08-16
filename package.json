@@ -5,11 +5,16 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "generate-webp": "node scripts/generate-webp.js",
+    "prebuild": "npm run generate-webp",
     "build": "vite build",
     "preview": "vite preview"
   },
   "devDependencies": {
-    "vite": "^8.2.0"
+    "sharp": "^0.35.3",
+    "svgo": "^4.0.2",
+    "vite": "^8.2.0",
+    "vite-plugin-image-optimizer": "^2.0.3"
   },
   "dependencies": {
     "gsap": "^3.15.0"

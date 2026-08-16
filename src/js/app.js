@@ -69,8 +69,33 @@ if (menuButton && mobileMenu) {
  * new URL(..., import.meta.url). Caminhos soltos em string quebrariam
  * no build publicado, que roda sob a base "/TattooSite/".
  */
-const projectImage = (fileName) =>
-  new URL(`../assets/tattooIMG/${fileName}`, import.meta.url).href;
+
+/*
+ * Detecção de suporte a WebP: um canvas 1x1 exportado como WebP.
+ * Roda uma única vez, de forma síncrona, e o resultado é reaproveitado
+ * em toda a sessão — não é reavaliado a cada clique no lightbox.
+ * Suportado por todo navegador relevante desde ~2020; o fallback
+ * (supportsWebp === false) garante que navegadores antigos continuem
+ * recebendo o PNG original sem quebrar nada.
+ */
+const supportsWebp = (() => {
+  try {
+    const canvas = document.createElement("canvas");
+    canvas.width = 1;
+    canvas.height = 1;
+    return canvas.toDataURL("image/webp").startsWith("data:image/webp");
+  } catch {
+    return false;
+  }
+})();
+
+const projectImage = (fileName) => {
+  const finalName = supportsWebp
+    ? fileName.replace(/\.png$/i, ".webp")
+    : fileName;
+
+  return new URL(`../assets/tattooIMG/${finalName}`, import.meta.url).href;
+};
 
 const tattooProjects = {
   "work-01": {
