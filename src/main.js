@@ -16,10 +16,13 @@ const heroLiquidContainer = document.querySelector(".hero");
 if (heroLiquidContainer) {
   initLiquidChrome({
     container: heroLiquidContainer,
-    baseColor: [0.1, 0.1, 0.1],
+    // Os dois tons do gradiente do .hero, em 0-1: o papel onde a tinta
+    // corre (#22231f) e o preto do pigmento concentrado.
+    baseColor: [0.133, 0.137, 0.121],
+    inkColor: [0.02, 0.021, 0.018],
     speed: 0.3,
     amplitude: 0.3,
-    interactive: true
+    interactive: false
   });
 }
 

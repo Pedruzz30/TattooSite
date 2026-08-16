@@ -4,17 +4,22 @@ import { Renderer, Program, Mesh, Triangle } from "ogl";
  * Fundo do hero: shader "Liquid Chrome", portado do componente React
  * original da biblioteca React Bits (DavidHDev/react-bits, MIT,
  * https://github.com/DavidHDev/react-bits — src/content/Backgrounds/
- * LiquidChrome/LiquidChrome.jsx). O shader (vertex + fragment) é
- * mantido exatamente como no original; o que muda é só a parte de
- * ciclo de vida, adaptada de useEffect/cleanup do React para JS puro
- * com destroy() explícito.
+ * LiquidChrome/LiquidChrome.jsx), com duas mudanças em cima do original:
+ *
+ * 1. Ciclo de vida adaptado de useEffect/cleanup do React para JS puro
+ *    com destroy() explícito.
+ * 2. O mapeamento de cor deixou de ser cromado e virou tinta — ver o
+ *    comentário no fim de renderImage(). Toda a distorção do uv, que é
+ *    o que produz o movimento líquido, continua igual à do original.
  *
  * As props do componente original viram parâmetros de initLiquidChrome:
  * baseColor, speed, amplitude, frequencyX, frequencyY, interactive.
+ * inkColor é nosso, não existe no componente original.
  */
 export function initLiquidChrome({
   container,
-  baseColor = [0.1, 0.1, 0.1],
+  baseColor = [0.133, 0.137, 0.121],
+  inkColor = [0.02, 0.021, 0.018],
   speed = 0.2,
   amplitude = 0.3,
   frequencyX = 3,
@@ -48,6 +53,7 @@ export function initLiquidChrome({
     uniform float uTime;
     uniform vec3 uResolution;
     uniform vec3 uBaseColor;
+    uniform vec3 uInkColor;
     uniform float uAmplitude;
     uniform float uFrequencyX;
     uniform float uFrequencyY;
@@ -69,7 +75,26 @@ export function initLiquidChrome({
         float ripple = sin(10.0 * dist - uTime * 2.0) * 0.03;
         uv += (diff / (dist + 0.0001)) * ripple * falloff;
  
-        vec3 color = uBaseColor / abs(sin(uTime - uv.y - uv.x));
+        /*
+         * Aqui o original fazia uBaseColor / abs(sin(...)): uma divisão
+         * que estoura para branco onde o seno tende a zero. Esse estouro
+         * especular é o que lê como metal polido — tinta não faz isso.
+         * Pigmento satura para o preto conforme concentra, então o mesmo
+         * campo vira densidade de pigmento em vez de brilho.
+         */
+        float wave = abs(sin(uTime - uv.y - uv.x));
+
+        // Os filamentos finos (wave -> 0) agora são onde a tinta adensa.
+        // O expoente controla o quanto ela sangra para fora do filamento:
+        // menor = mancha mais difusa, maior = traço mais definido.
+        float pigment = pow(1.0 - wave, 2.6);
+
+        // O fundo respira devagar entre os dois tons do gradiente do hero,
+        // para o papel não ficar chapado atrás da tinta.
+        float depth = 0.5 + 0.5 * sin(uv.x * 0.6 + uv.y * 0.4 - uTime * 0.5);
+        vec3 ground = mix(uBaseColor, uBaseColor * 2.0, depth);
+
+        vec3 color = mix(ground, uInkColor, pigment);
         return vec4(color, 1.0);
     }
  
@@ -101,10 +126,22 @@ export function initLiquidChrome({
         ])
       },
       uBaseColor: { value: new Float32Array(baseColor) },
+      uInkColor: { value: new Float32Array(inkColor) },
       uAmplitude: { value: amplitude },
       uFrequencyX: { value: frequencyX },
       uFrequencyY: { value: frequencyY },
-      uMouse: { value: new Float32Array([0, 0]) }
+      /*
+       * Sem interação, o mouse é fixado longe da tela em vez de (0,0).
+       * O shader aplica um ripple com falloff exp(-dist * 20.0) ao
+       * redor de uMouse: parado em (0,0) ele cairia bem no canto
+       * inferior esquerdo, pulsando com uTime — um artefato visível.
+       * A 10 unidades de distância o falloff zera em toda a tela.
+       *
+       * O valor 10 não é arbitrário: uMouse entra nas ondas como
+       * cos(... + uMouse.x * PI), e 10 * PI são exatamente 5 períodos
+       * completos, então a fase do padrão fica idêntica à de (0,0).
+       */
+      uMouse: { value: new Float32Array(interactive ? [0, 0] : [10, 10]) }
     }
   });
   const mesh = new Mesh(gl, { geometry, program });
