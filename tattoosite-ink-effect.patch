@@ -1,0 +1,372 @@
+diff --git a/index.html b/index.html
+index 3597278..0ca6796 100644
+--- a/index.html
++++ b/index.html
+@@ -57,13 +57,18 @@
+         <span></span>
+       </div>
+
++      <canvas class="hero-ink-canvas" aria-hidden="true"></canvas>
++
+       <div class="hero-ink" aria-hidden="true">
+-        <img
+-          class="hero-ink-image"
+-          src="/src/assets/images/hero/TintaTattooHero.img1.png"
+-          alt=""
+-          draggable="false"
+-        />
++        <picture>
++          <source srcset="/src/assets/images/hero/TintaTattooHero.img1.webp" type="image/webp" />
++          <img
++            class="hero-ink-image"
++            src="/src/assets/images/hero/TintaTattooHero.img1.png"
++            alt=""
++            draggable="false"
++          />
++        </picture>
+       </div>
+
+       <div class="hero-word" aria-hidden="true">Realismo</div>
+@@ -125,11 +130,14 @@
+
+         <article class="work-card work-card--one">
+           <div class="work-image work-image--one">
+-            <img
+-              src="/src/assets/tattooIMG/SerpenteOrnamental.png"
+-              alt=""
+-              decoding="async"
+-            />
++            <picture>
++              <source srcset="/src/assets/tattooIMG/SerpenteOrnamental.webp" type="image/webp" />
++              <img
++                src="/src/assets/tattooIMG/SerpenteOrnamental.png"
++                alt=""
++                decoding="async"
++              />
++            </picture>
+           </div>
+
+           <div class="work-card-info">
+@@ -153,11 +161,14 @@
+           </h2>
+
+           <div class="work-image work-image--two">
+-            <img
+-              src="/src/assets/tattooIMG/FechamentoBraco.png"
+-              alt=""
+-              decoding="async"
+-            />
++            <picture>
++              <source srcset="/src/assets/tattooIMG/FechamentoBraco.webp" type="image/webp" />
++              <img
++                src="/src/assets/tattooIMG/FechamentoBraco.png"
++                alt=""
++                decoding="async"
++              />
++            </picture>
+           </div>
+
+           <a href="#work-06" class="card-action card-action--dark" aria-label="Ver projeto Braço completo">
+@@ -197,14 +208,17 @@
+       <div class="machine-stage machine-stage--work" aria-hidden="true">
+         <div class="machine-visual">
+           <div class="machine-float">
+-            <img
+-              class="tattoo-machine"
+-              src="/src/assets/images/hero/TattooMachine.img.png"
+-              alt=""
+-              draggable="false"
+-              loading="lazy"
+-              decoding="async"
+-            />
++            <picture>
++              <source srcset="/src/assets/images/hero/TattooMachine.img.webp" type="image/webp" />
++              <img
++                class="tattoo-machine"
++                src="/src/assets/images/hero/TattooMachine.img.png"
++                alt=""
++                draggable="false"
++                loading="lazy"
++                decoding="async"
++              />
++            </picture>
+             <span class="machine-light" aria-hidden="true"></span>
+           </div>
+         </div>
+@@ -236,13 +250,16 @@
+         <article class="work-tile work-tile--01" id="work-01">
+           <div class="work-tile-link">
+             <div class="work-tile-media" data-project="work-01">
+-              <img
+-                class="work-tile-image"
+-                src="/src/assets/tattooIMG/SerpenteOrnamental.png"
+-                alt="Tatuagem blackwork de serpente ornamental no antebraço"
+-                loading="lazy"
+-                decoding="async"
+-              />
++              <picture>
++                <source srcset="/src/assets/tattooIMG/SerpenteOrnamental.webp" type="image/webp" />
++                <img
++                  class="work-tile-image"
++                  src="/src/assets/tattooIMG/SerpenteOrnamental.png"
++                  alt="Tatuagem blackwork de serpente ornamental no antebraço"
++                  loading="lazy"
++                  decoding="async"
++                />
++              </picture>
+             </div>
+             <span class="work-tile-index" aria-hidden="true">01</span>
+             <button
+@@ -264,13 +281,16 @@
+         <article class="work-tile work-tile--02">
+           <div class="work-tile-link">
+             <div class="work-tile-media" data-project="work-02">
+-              <img
+-                class="work-tile-image"
+-                src="/src/assets/tattooIMG/MapaPeito.png"
+-                alt="Tatuagem blackwork ornamental cobrindo peito e ombro"
+-                loading="lazy"
+-                decoding="async"
+-              />
++              <picture>
++                <source srcset="/src/assets/tattooIMG/MapaPeito.webp" type="image/webp" />
++                <img
++                  class="work-tile-image"
++                  src="/src/assets/tattooIMG/MapaPeito.png"
++                  alt="Tatuagem blackwork ornamental cobrindo peito e ombro"
++                  loading="lazy"
++                  decoding="async"
++                />
++              </picture>
+             </div>
+             <span class="work-tile-index" aria-hidden="true">02</span>
+             <button
+@@ -292,13 +312,16 @@
+         <article class="work-tile work-tile--03">
+           <div class="work-tile-link">
+             <div class="work-tile-media" data-project="work-03">
+-              <img
+-                class="work-tile-image"
+-                src="/src/assets/tattooIMG/RetratoCinza.png"
+-                alt="Tatuagem realista em preto e cinza com retrato feminino"
+-                loading="lazy"
+-                decoding="async"
+-              />
++              <picture>
++                <source srcset="/src/assets/tattooIMG/RetratoCinza.webp" type="image/webp" />
++                <img
++                  class="work-tile-image"
++                  src="/src/assets/tattooIMG/RetratoCinza.png"
++                  alt="Tatuagem realista em preto e cinza com retrato feminino"
++                  loading="lazy"
++                  decoding="async"
++                />
++              </picture>
+             </div>
+             <span class="work-tile-index" aria-hidden="true">03</span>
+             <button
+@@ -320,13 +343,16 @@
+         <article class="work-tile work-tile--04">
+           <div class="work-tile-link">
+             <div class="work-tile-media" data-project="work-04">
+-              <img
+-                class="work-tile-image"
+-                src="/src/assets/tattooIMG/LinhasMao.png"
+-                alt="Tatuagem fine line delicada na mão e no punho"
+-                loading="lazy"
+-                decoding="async"
+-              />
++              <picture>
++                <source srcset="/src/assets/tattooIMG/LinhasMao.webp" type="image/webp" />
++                <img
++                  class="work-tile-image"
++                  src="/src/assets/tattooIMG/LinhasMao.png"
++                  alt="Tatuagem fine line delicada na mão e no punho"
++                  loading="lazy"
++                  decoding="async"
++                />
++              </picture>
+             </div>
+             <span class="work-tile-index" aria-hidden="true">04</span>
+             <button
+@@ -348,13 +374,16 @@
+         <article class="work-tile work-tile--05">
+           <div class="work-tile-link">
+             <div class="work-tile-media" data-project="work-05">
+-              <img
+-                class="work-tile-image"
+-                src="/src/assets/tattooIMG/AsaFechada.png"
+-                alt="Tatuagem blackwork orgânica acompanhando a lateral do torso"
+-                loading="lazy"
+-                decoding="async"
+-              />
++              <picture>
++                <source srcset="/src/assets/tattooIMG/AsaFechada.webp" type="image/webp" />
++                <img
++                  class="work-tile-image"
++                  src="/src/assets/tattooIMG/AsaFechada.png"
++                  alt="Tatuagem blackwork orgânica acompanhando a lateral do torso"
++                  loading="lazy"
++                  decoding="async"
++                />
++              </picture>
+             </div>
+             <span class="work-tile-index" aria-hidden="true">05</span>
+             <button
+@@ -376,13 +405,16 @@
+         <article class="work-tile work-tile--06" id="work-06">
+           <div class="work-tile-link">
+             <div class="work-tile-media" data-project="work-06">
+-              <img
+-                class="work-tile-image"
+-                src="/src/assets/tattooIMG/FechamentoBraco.png"
+-                alt="Tatuagem autoral cobrindo o braço completo"
+-                loading="lazy"
+-                decoding="async"
+-              />
++              <picture>
++                <source srcset="/src/assets/tattooIMG/FechamentoBraco.webp" type="image/webp" />
++                <img
++                  class="work-tile-image"
++                  src="/src/assets/tattooIMG/FechamentoBraco.png"
++                  alt="Tatuagem autoral cobrindo o braço completo"
++                  loading="lazy"
++                  decoding="async"
++                />
++              </picture>
+             </div>
+             <span class="work-tile-index" aria-hidden="true">06</span>
+             <button
+@@ -437,13 +469,16 @@
+       <div class="artist-intro">
+         <figure class="artist-portrait">
+           <span class="artist-portrait-media">
+-            <img
+-              class="artist-portrait-image"
+-              src="/src/assets/images/hero/TatuadorIMG.png"
+-              alt="Tatuador trabalhando em uma tatuagem"
+-              loading="lazy"
+-              decoding="async"
+-            />
++            <picture>
++              <source srcset="/src/assets/images/hero/TatuadorIMG.webp" type="image/webp" />
++              <img
++                class="artist-portrait-image"
++                src="/src/assets/images/hero/TatuadorIMG.png"
++                alt="Tatuador trabalhando em uma tatuagem"
++                loading="lazy"
++                decoding="async"
++              />
++            </picture>
+           </span>
+           <figcaption>Rio de Janeiro · desde 2019</figcaption>
+         </figure>
+@@ -530,13 +565,16 @@
+
+       <div class="artist-studio">
+         <div class="studio-media">
+-          <img
+-            class="studio-image"
+-            src="/src/assets/images/hero/EstudioTattooIMG.png"
+-            alt="Sala do estúdio com uma cadeira de tatuagem"
+-            loading="lazy"
+-            decoding="async"
+-          />
++          <picture>
++            <source srcset="/src/assets/images/hero/EstudioTattooIMG.webp" type="image/webp" />
++            <img
++              class="studio-image"
++              src="/src/assets/images/hero/EstudioTattooIMG.png"
++              alt="Sala do estúdio com uma cadeira de tatuagem"
++              loading="lazy"
++              decoding="async"
++            />
++          </picture>
+         </div>
+
+         <div class="studio-info">
+diff --git a/src/main.js b/src/main.js
+index 99aa49f..ce15ca9 100644
+--- a/src/main.js
++++ b/src/main.js
+@@ -1,8 +1,11 @@
+ import gsap from "gsap";
+ import { ScrollTrigger } from "gsap/ScrollTrigger";
++import { initInk } from "./js/effects/ink.js";
+
+ gsap.registerPlugin(ScrollTrigger);
+
++initInk();
++
+ const prefersReducedMotion =
+   window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+   new URLSearchParams(window.location.search).has("reduced-motion");
+diff --git a/src/styles/main.css b/src/styles/main.css
+index 950838e..dd515b7 100644
+--- a/src/styles/main.css
++++ b/src/styles/main.css
+@@ -46,6 +46,21 @@ button {
+     );
+ }
+
++/*
++ * Canvas de fundo com manchas de tinta se movendo lentamente.
++ * Fica atrás de .hero-ink (a máscara de luz que reage ao mouse),
++ * dando profundidade sem precisar de vídeo — é só matemática,
++ * então não pesa nada no carregamento da página.
++ */
++.hero-ink-canvas {
++  position: absolute;
++  inset: 0;
++  z-index: 0;
++  width: 100%;
++  height: 100%;
++  display: block;
++}
++
+ .hero-ink {
+   position: absolute;
+   bottom: 0;
+@@ -704,14 +719,14 @@ button {
+ }
+
+ .section-label {
+-  opacity: 0.4;
++  opacity: 0.55;
+   font-size: 10px;
+   letter-spacing: 0.2em;
+   text-transform: uppercase;
+ }
+
+ .section-label--muted {
+-  opacity: 0.25;
++  opacity: 0.5;
+ }
+
+ .work-section {
+@@ -1652,7 +1667,7 @@ button {
+   display: inline-flex;
+   align-items: center;
+   gap: 10px;
+-  opacity: 0.45;
++  opacity: 0.55;
+   font-size: 10px;
+   letter-spacing: 0.2em;
+   text-transform: uppercase;
+@@ -1740,14 +1755,14 @@ button {
+   gap: 12px 40px;
+   padding-top: 26px;
+   border-top: 1px solid var(--rule);
+-  color: rgba(255, 255, 255, 0.32);
++  color: rgba(255, 255, 255, 0.55);
+   font-size: 12px;
+   line-height: 1.5;
+ }
+
+ .footer-legal strong {
+   margin-right: 6px;
+-  color: rgba(255, 255, 255, 0.75);
++  color: rgba(255, 255, 255, 0.85);
+   font-weight: 600;
+   letter-spacing: 0.06em;
+ }
