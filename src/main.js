@@ -1,7 +1,10 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { initInk } from "./js/effects/ink.js";
 
 gsap.registerPlugin(ScrollTrigger);
+
+initInk();
 
 const prefersReducedMotion =
   window.matchMedia("(prefers-reduced-motion: reduce)").matches ||

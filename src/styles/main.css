@@ -46,6 +46,21 @@ button {
     );
 }
 
+/*
+ * Canvas de fundo com manchas de tinta se movendo lentamente.
+ * Fica atrás de .hero-ink (a máscara de luz que reage ao mouse),
+ * dando profundidade sem precisar de vídeo — é só matemática,
+ * então não pesa nada no carregamento da página.
+ */
+.hero-ink-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
 .hero-ink {
   position: absolute;
   bottom: 0;
@@ -704,14 +719,14 @@ button {
 }
 
 .section-label {
-  opacity: 0.4;
+  opacity: 0.55;
   font-size: 10px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
 }
 
 .section-label--muted {
-  opacity: 0.25;
+  opacity: 0.5;
 }
 
 .work-section {
@@ -1652,7 +1667,7 @@ button {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  opacity: 0.45;
+  opacity: 0.55;
   font-size: 10px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -1740,14 +1755,14 @@ button {
   gap: 12px 40px;
   padding-top: 26px;
   border-top: 1px solid var(--rule);
-  color: rgba(255, 255, 255, 0.32);
+  color: rgba(255, 255, 255, 0.55);
   font-size: 12px;
   line-height: 1.5;
 }
 
 .footer-legal strong {
   margin-right: 6px;
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255, 0.85);
   font-weight: 600;
   letter-spacing: 0.06em;
 }
