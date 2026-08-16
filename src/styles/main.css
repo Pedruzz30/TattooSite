@@ -47,12 +47,13 @@ button {
 }
 
 /*
- * Canvas do shader de fluido (Three.js). É a camada mais ao fundo:
- * cobre o gradiente estático do .hero, que continua servindo de
+ * Canvas do shader Liquid Chrome (React Bits, portado para JS puro
+ * em src/js/effects/liquidchrome.js). É a camada mais ao fundo do
+ * hero: cobre o gradiente estático, que continua servindo de
  * fallback instantâneo enquanto o WebGL inicializa — ou permanente,
  * se prefers-reduced-motion estiver ativo e o script nem rodar.
  */
-.hero-fluid-canvas {
+.hero-liquid-chrome-canvas {
   position: absolute;
   inset: 0;
   z-index: 0;

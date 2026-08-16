@@ -1,12 +1,27 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { initInk } from "./js/effects/ink.js";
-import { initFluidBackground } from "./js/effects/fluidbackground.js";
+import { initLiquidChrome } from "./js/effects/liquidchrome.js";
 
 gsap.registerPlugin(ScrollTrigger);
 
-initFluidBackground();
-initInk();
+// TESTE LiquidChrome: initInk() está desligado de propósito para medir
+// só o custo do shader WebGL. As manchas do ink.js desenham por cima
+// do canvas do chrome (mesmo z-index, depois no DOM) e somariam custo
+// de CPU ao teste. Reativar assim que o teste terminar.
+// initInk();
+
+const heroLiquidContainer = document.querySelector(".hero");
+
+if (heroLiquidContainer) {
+  initLiquidChrome({
+    container: heroLiquidContainer,
+    baseColor: [0.1, 0.1, 0.1],
+    speed: 0.3,
+    amplitude: 0.3,
+    interactive: true
+  });
+}
 
 const prefersReducedMotion =
   window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
