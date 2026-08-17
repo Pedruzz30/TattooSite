@@ -83,9 +83,22 @@ button {
   left: 42%;
   z-index: 3;
   isolation: isolate;
-  width: max(115vw, 1280px);
+  /*
+   * A estátua é quase quadrada (862x941, proporção 0.92), diferente da
+   * onda de tinta que estava aqui antes (1536x1024, proporção 1.50).
+   * Por isso a medida agora parte da ALTURA da viewport, não da largura:
+   * com a regra antiga (width: 115vw) a imagem passaria de 120vw de
+   * altura e não caberia no hero de jeito nenhum.
+   *
+   * O limite em vw é só uma trava para telas muito baixas e largas.
+   */
+  width: min(92svh, 78vw);
   pointer-events: none;
-  transform: translate3d(-50%, 30%, 0);
+  /*
+   * Deslocamento vertical pequeno: a onda afundava 30% para sangrar no
+   * rodapé, mas a estátua precisa apoiar na base do hero, não sumir nela.
+   */
+  transform: translate3d(-50%, 6%, 0);
   user-select: none;
 }
 
@@ -97,8 +110,8 @@ button {
   content: "";
   pointer-events: none;
   transform-origin: center;
-  -webkit-mask-image: url("../assets/images/hero/TintaTattooHero.img1.png");
-  mask-image: url("../assets/images/hero/TintaTattooHero.img1.png");
+  -webkit-mask-image: url("../assets/images/hero/EstatuaTattooIMG1.png");
+  mask-image: url("../assets/images/hero/EstatuaTattooIMG1.png");
   -webkit-mask-position: center;
   mask-position: center;
   -webkit-mask-repeat: no-repeat;
@@ -326,11 +339,21 @@ button {
   line-height: 1.03;
 }
 
+/*
+ * Ocupa o lugar onde ficava o .reel-button (o círculo com o play).
+ * Os dois apontavam para #work, então o botão redondo era redundante
+ * com o "Ver trabalhos" que já existe aqui dentro.
+ *
+ * Ancorado por bottom, e não por top, para casar com o bottom: 35% que
+ * o botão usava. A referência é o .hero-content, que começa abaixo da
+ * navbar — por isso o bloco cai uns 30px mais baixo do que o botão
+ * caía, que se ancorava no .hero inteiro.
+ */
 .hero-description {
   position: absolute;
   z-index: 6;
-  top: 13%;
-  left: 33.5%;
+  bottom: 35%;
+  left: 11.85%;
   width: 245px;
 }
 
@@ -666,34 +689,6 @@ button {
 .fact-mark--lines {
   border-radius: 50%;
   background: repeating-conic-gradient(from 0deg, currentColor 0 2deg, transparent 2deg 22.5deg);
-}
-
-.reel-button {
-  position: absolute;
-  bottom: 35%;
-  left: 11.85%;
-  z-index: 10;
-  display: grid;
-  place-items: center;
-  width: 126px;
-  height: 126px;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  border-radius: 50%;
-  background: transparent;
-  color: #fff;
-  cursor: pointer;
-}
-
-.play {
-  display: grid;
-  place-items: center;
-  width: 76px;
-  height: 76px;
-  padding-left: 3px;
-  border-radius: 50%;
-  background: #f1f0eb;
-  color: #111;
-  font-size: 15px;
 }
 
 .scroll-indicator {
@@ -1955,8 +1950,11 @@ button {
     left: 6%;
   }
 
+  /* bottom: auto anula o ancoramento por baixo da regra base — com top
+     e bottom definidos ao mesmo tempo, o bloco seria esticado. */
   .hero-description {
     top: 27%;
+    bottom: auto;
     left: 6%;
     width: min(320px, 80vw);
   }
@@ -1985,14 +1983,6 @@ button {
 
   .machine-visual {
     width: min(96vw, 760px);
-  }
-
-  .reel-button {
-    right: 8%;
-    bottom: 35%;
-    left: auto;
-    width: 104px;
-    height: 104px;
   }
 
   .hero-word {
@@ -2160,6 +2150,7 @@ button {
 
   .hero-description {
     top: 22%;
+    bottom: auto;
     left: 20px;
   }
 
@@ -2201,19 +2192,6 @@ button {
 
   .machine-light {
     animation-duration: 10s;
-  }
-
-  .reel-button {
-    top: 420px;
-    right: 28px;
-    bottom: auto;
-    width: 88px;
-    height: 88px;
-  }
-
-  .play {
-    width: 58px;
-    height: 58px;
   }
 
   .scroll-indicator,
