@@ -27,6 +27,18 @@ function setupDragButton(button) {
   fill.setAttribute("aria-hidden", "true");
   button.prepend(fill);
 
+  /*
+   * Um <a href> é arrastável por padrão. Sem isto o Chrome inicia o
+   * drag nativo do link logo no primeiro pointermove: dispara
+   * pointercancel, o que aborta o gesto pela metade, e ainda desenha a
+   * miniatura fantasma do link seguindo o cursor — que é o que se via
+   * "atrás" do botão. Fica aqui em vez de draggable="false" no HTML
+   * para valer também para qualquer .button adicionado depois.
+   */
+  button.addEventListener("dragstart", (event) => {
+    event.preventDefault();
+  });
+
   let pointerId = null;
   let startX = 0;
   let travel = 0;
