@@ -2,6 +2,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { initInk } from "./js/effects/ink.js";
 import { initLiquidChrome } from "./js/effects/liquidchrome.js";
+import { initDragButtons } from "./js/effects/drag-button.js";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -25,6 +26,8 @@ if (heroLiquidContainer) {
     interactive: false
   });
 }
+
+initDragButtons();
 
 const prefersReducedMotion =
   window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
