@@ -373,6 +373,14 @@ button {
    * disputaria com a rolagem e o gesto seria cancelado no meio.
    */
   touch-action: pan-y;
+  /*
+   * Arrastar sobre o rótulo selecionaria o texto, e o realce azul da
+   * seleção cresce junto com o gesto por baixo da faixa. O Chrome não
+   * mostra isso porque o arrasto nativo do link já suprimia a seleção;
+   * o Opera seleciona mesmo com o dragstart cancelado.
+   */
+  user-select: none;
+  -webkit-user-select: none;
   display: inline-flex;
   align-items: center;
   gap: 12px;
@@ -418,7 +426,15 @@ button {
   transform: scaleX(0);
   transform-origin: left;
   pointer-events: none;
-  border-radius: inherit;
+  /*
+   * Sem raio de propósito. Com border-radius: inherit a faixa vira uma
+   * segunda pílula de 999px, e o scaleX espalma esse raio: a ponta
+   * arredondada da direita entra como uma forma própria deslizando por
+   * trás do ícone e do rótulo — parece um segundo elemento surgindo.
+   * Um retângulo reto resolve, porque o overflow: hidden do botão já
+   * recorta a faixa no contorno da pílula: a ponta esquerda continua
+   * arredondada e a direita vira a borda reta que o preenchimento pede.
+   */
   /*
    * Só para a volta ao zero quando o arrasto é abandonado. Durante o
    * arrasto a transição sai (regra abaixo), senão a faixa ficaria
@@ -445,8 +461,19 @@ button {
   50% { transform: translateX(-5px); }
 }
 
-.button:not(.is-dragging) .button-icon {
+.button-icon {
   animation: button-icon-sway 2.2s ease-in-out infinite;
+}
+
+/*
+ * Pausa em vez de remover. Com a animação removida no arrasto, o ícone
+ * era teleportado de volta ao ponto zero no instante do pointerdown —
+ * um salto de até 5px, conforme onde o balanço estivesse no ciclo — e
+ * ao soltar recomeçava do início. Pausado, ele congela onde está e
+ * retoma dali.
+ */
+.button.is-dragging .button-icon {
+  animation-play-state: paused;
 }
 
 /*
@@ -455,7 +482,7 @@ button {
  * continua: é interação, não animação decorativa.
  */
 @media (prefers-reduced-motion: reduce) {
-  .button:not(.is-dragging) .button-icon {
+  .button-icon {
     animation: none;
   }
 
