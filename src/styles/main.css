@@ -364,23 +364,6 @@ button {
 }
 
 .button {
-  position: relative;
-  overflow: hidden;
-  cursor: grab;
-  /*
-   * Deixa o gesto vertical para a página (rolagem) e reserva o
-   * horizontal para o arrasto. Sem isto, arrastar o botão no celular
-   * disputaria com a rolagem e o gesto seria cancelado no meio.
-   */
-  touch-action: pan-y;
-  /*
-   * Arrastar sobre o rótulo selecionaria o texto, e o realce azul da
-   * seleção cresce junto com o gesto por baixo da faixa. O Chrome não
-   * mostra isso porque o arrasto nativo do link já suprimia a seleção;
-   * o Opera seleciona mesmo com o dragstart cancelado.
-   */
-  user-select: none;
-  -webkit-user-select: none;
   display: inline-flex;
   align-items: center;
   gap: 12px;
@@ -393,10 +376,6 @@ button {
   transition:
     background 0.3s ease,
     color 0.3s ease;
-}
-
-.button.is-dragging {
-  cursor: grabbing;
 }
 
 .button-icon {
@@ -418,77 +397,9 @@ button {
   background: currentColor;
 }
 
-.button-drag-fill {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background: rgba(255, 255, 255, 0.1);
-  transform: scaleX(0);
-  transform-origin: left;
-  pointer-events: none;
-  /*
-   * Sem raio de propósito. Com border-radius: inherit a faixa vira uma
-   * segunda pílula de 999px, e o scaleX espalma esse raio: a ponta
-   * arredondada da direita entra como uma forma própria deslizando por
-   * trás do ícone e do rótulo — parece um segundo elemento surgindo.
-   * Um retângulo reto resolve, porque o overflow: hidden do botão já
-   * recorta a faixa no contorno da pílula: a ponta esquerda continua
-   * arredondada e a direita vira a borda reta que o preenchimento pede.
-   */
-  /*
-   * Só para a volta ao zero quando o arrasto é abandonado. Durante o
-   * arrasto a transição sai (regra abaixo), senão a faixa ficaria
-   * perseguindo o cursor com atraso em vez de grudar nele.
-   */
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.button.is-dragging .button-drag-fill {
-  transition: none;
-}
-
-/*
- * A faixa é o único filho posicionado do botão, então sem isto ela
- * pintaria por cima do ícone e do rótulo, que são estáticos.
- */
-.button > :not(.button-drag-fill) {
-  position: relative;
-  z-index: 1;
-}
-
-@keyframes button-icon-sway {
-  0%, 100% { transform: translateX(0); }
-  50% { transform: translateX(-5px); }
-}
-
-.button-icon {
-  animation: button-icon-sway 2.2s ease-in-out infinite;
-}
-
-/*
- * Pausa em vez de remover. Com a animação removida no arrasto, o ícone
- * era teleportado de volta ao ponto zero no instante do pointerdown —
- * um salto de até 5px, conforme onde o balanço estivesse no ciclo — e
- * ao soltar recomeçava do início. Pausado, ele congela onde está e
- * retoma dali.
- */
-.button.is-dragging .button-icon {
-  animation-play-state: paused;
-}
-
-/*
- * O balanço é uma animação infinita, exatamente o tipo de movimento
- * que prefers-reduced-motion existe para desligar. O arrasto em si
- * continua: é interação, não animação decorativa.
- */
-@media (prefers-reduced-motion: reduce) {
-  .button-icon {
-    animation: none;
-  }
-
-  .button-drag-fill {
-    transition: none;
-  }
+.button:hover {
+  background: #eeeeea;
+  color: #111;
 }
 
 .machine-visual {
