@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Saida de script com caminho invalido: um argumento faltando vira a
+# string "undefined" e o script escreve em ./undefined/ na raiz do projeto.
+undefined/
