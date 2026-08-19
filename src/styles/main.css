@@ -736,20 +736,42 @@ button {
   padding: 128px 5vw 140px;
   background:
     radial-gradient(circle at 78% 62%, #292a26 0%, #161714 34%, #090909 68%);
+  /*
+   * O texto e a máquina dividem a primeira linha; a galeria atravessa
+   * as duas colunas embaixo. A máquina passa a reservar o próprio
+   * espaço em vez de flutuar solta, então não cobre o texto nem o
+   * empurra para baixo. O layout inteiro de cada breakpoint fica
+   * declarado no grid-template-areas, num lugar só.
+   */
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.82fr);
+  grid-template-areas:
+    "head machine"
+    "gallery gallery";
+  align-items: center;
+  column-gap: clamp(24px, 4vw, 80px);
 }
 
 /*
- * A máquina reaparece aqui como assinatura visual,
- * atrás do conteúdo e sangrando para fora da tela.
+ * A máquina fica ao lado do texto, centrada na altura do bloco.
+ *
+ * Antes ela dependia de uma regra base .machine-stage com
+ * position: absolute, que o commit 03b2878 apagou junto com as regras
+ * do .button-icon. Sem ela, top/right/z-index não faziam efeito nenhum
+ * e a imagem virava um bloco estático de ~550px de altura acima do
+ * título, empurrando a seção inteira para baixo. Como item de grade
+ * ela não precisa de posicionamento para ficar no lugar certo.
  */
 .machine-stage.machine-stage--work {
-  top: -2%;
-  right: -12vw;
-  bottom: auto;
+  grid-area: machine;
   z-index: 0;
-  width: min(58vw, 820px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
   height: auto;
-  opacity: 0.42;
+  opacity: 0.9;
+  pointer-events: none;
 }
 
 .machine-stage.machine-stage--work .machine-visual {
@@ -757,6 +779,7 @@ button {
 }
 
 .work-head {
+  grid-area: head;
   position: relative;
   z-index: 2;
   max-width: 640px;
@@ -793,6 +816,7 @@ button {
  * para quebrar o alinhamento e dar ritmo à leitura.
  */
 .work-gallery {
+  grid-area: gallery;
   position: relative;
   z-index: 2;
   display: grid;
@@ -1977,15 +2001,25 @@ button {
     letter-spacing: -0.06em;
   }
 
+  /*
+   * Abaixo de 900px não há largura para duas colunas: a máquina desce
+   * para baixo do texto, ainda antes da galeria, e deixa de disputar
+   * espaço horizontal com o título.
+   */
   .machine-stage.machine-stage--work {
-    top: 2%;
-    right: -22vw;
-    width: 74vw;
-    opacity: 0.3;
+    justify-self: center;
+    width: min(90%, 560px);
+    margin-top: 64px;
+    opacity: 0.85;
   }
 
   .work-section {
     padding: 104px 5vw 116px;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "head"
+      "machine"
+      "gallery";
   }
 
   .work-head {
@@ -2191,12 +2225,9 @@ button {
   }
 
   .machine-stage.machine-stage--work {
-    top: auto;
-    right: auto;
-    bottom: 3%;
-    left: -26vw;
-    width: 140vw;
-    opacity: 0.22;
+    width: 100%;
+    margin-top: 48px;
+    opacity: 0.8;
   }
 
   .work-section h2 {
